@@ -19,7 +19,7 @@
         "crm",
         "cabinet_directory",
         "mass_mailing",
-        # "calendar",  # COMMENTED OUT: Causes KeyError during install, calendar code disabled in models
+        "calendar",  # Required: Some dependency module references calendar fields during initialization
     ],
     "data": [
         "security/ir.model.access.csv",
