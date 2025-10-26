@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_task_document_lines,task_document_lines,model_task_document_lines,,1,1,1,1
+access_task_document_required_lines,task_document_required_lines,model_task_document_required_lines,,1,1,1,1
+access_product_template_documents,product_template_documents,model_product_template_documents,,1,1,1,1
+access_product_template_required_documents,product_template_required_documents,model_product_template_required_documents,,1,1,1,1
