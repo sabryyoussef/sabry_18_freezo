@@ -19,7 +19,6 @@
         "crm",
         "cabinet_directory",
         "mass_mailing",
-        "calendar",  # Required: Some dependency module references calendar fields during initialization
         "survey",  # Required for rating functionality used by bwa_survey
     ],
     "data": [
