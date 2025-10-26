@@ -1,7 +1,7 @@
 {
     "name": "Partner Custom",
     "author": "Beshoy Wageh",
-    "depends": ["base", "product", "documents"],
+    "depends": ["base", "product", "documents", "base_address_extended"],
     "data": [
         "security/ir.model.access.csv",
         "security/security.xml",
