@@ -1,7 +1,7 @@
 {
     'name': 'Risk Assessment',
     'author': 'Beshoy Wageh',
-    'depends': ['base','crm'],
+    'depends': ['base','crm', 'base_address_extended'],
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',
