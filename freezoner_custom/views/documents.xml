@@ -283,11 +283,11 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_schedule_meeting" type="object"
+                        <!-- <button name="action_schedule_meeting" type="object"
                             class="oe_stat_button" icon="fa-calendar"
                             context="{'partner_id': partner_id}"
                             string="Meetings">
-                        </button>
+                        </button> -->
                     </div>
                     <div class="oe_title">
                         <h1>

@@ -9,4 +9,116 @@
             </xpath>
         </field>
     </record>
+
+    <!-- Custom rating submission template -->
+    <template id="rating_external_page_submit_custom" name="Rating External Page Submit Custom">
+        <t t-call="web.frontend_layout">
+            <div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card rating-card rating-animation">
+                            <div class="card-header rating-success">
+                                <h4 class="mb-0">
+                                    <i class="fa fa-star me-2"></i>
+                                    <t t-esc="_('Rate Your Experience')"/>
+                                </h4>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="mb-4">
+                                    <h5>
+                                        <t t-esc="_('Thank you for rating:')"/>
+                                        <strong t-esc="rating.res_name"/>
+                                    </h5>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="rating-stars">
+                                        <t t-foreach="range(1, 6)" t-as="star">
+                                            <i t-attf-class="fa fa-star #{star &lt;= rate ? 'text-warning' : 'text-muted'}" 
+                                               style="font-size: 2rem; margin: 0 5px;"></i>
+                                        </t>
+                                    </div>
+                                    <p class="mt-2">
+                                        <strong t-esc="rate_priority.get(rate, _('Unknown'))"/>
+                                    </p>
+                                </div>
+
+                                <div class="alert alert-success">
+                                    <i class="fa fa-check-circle me-2"></i>
+                                    <t t-esc="_('Your rating has been submitted successfully!')"/>
+                                </div>
+
+                                <div class="mt-4">
+                                    <a t-attf-href="/web" class="btn btn-primary">
+                                        <i class="fa fa-home me-2"></i>
+                                        <t t-esc="_('Return to Home')"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Rating feedback form template -->
+    <template id="rating_feedback_form" name="Rating Feedback Form">
+        <t t-call="web.frontend_layout">
+            <div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card rating-card rating-animation">
+                            <div class="card-header rating-info">
+                                <h4 class="mb-0">
+                                    <i class="fa fa-comment me-2"></i>
+                                    <t t-esc="_('Provide Feedback')"/>
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" t-attf-action="/rate/#{token}/submit_feedback">
+                                    <div class="mb-3">
+                                        <label class="form-label">
+                                            <t t-esc="_('Rate Your Experience')"/>
+                                        </label>
+                                        <div class="rating-input">
+                                            <t t-foreach="range(1, 6)" t-as="star">
+                                                <input type="radio" 
+                                                       t-att-name="rate" 
+                                                       t-att-value="star" 
+                                                       t-att-id="'star_' + star"
+                                                       class="btn-check"/>
+                                                <label t-att-for="'star_' + star" 
+                                                       class="btn btn-outline-warning rating-star">
+                                                    <i class="fa fa-star"></i>
+                                                </label>
+                                            </t>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="feedback" class="form-label">
+                                            <t t-esc="_('Additional Comments (Optional)')"/>
+                                        </label>
+                                        <textarea name="feedback" 
+                                                  id="feedback" 
+                                                  class="form-control" 
+                                                  rows="4" 
+                                                  placeholder="Share your thoughts about this experience..."></textarea>
+                                    </div>
+                                    
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="fa fa-paper-plane me-2"></i>
+                                            <t t-esc="_('Submit Feedback')"/>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
 </odoo>

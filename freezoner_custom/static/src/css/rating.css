@@ -1,0 +1,92 @@
+/* Rating System Styles for Freezoner Custom */
+
+.rating-stars {
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.rating-stars .fa-star {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.rating-stars .fa-star:hover {
+    transform: scale(1.1);
+}
+
+.rating-input {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.rating-star {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.rating-star:hover {
+    transform: scale(1.1);
+    background-color: #ffc107 !important;
+    color: #000 !important;
+}
+
+.btn-check:checked + .rating-star {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+    border-color: #ffc107 !important;
+}
+
+.rating-card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+}
+
+.rating-card .card-header {
+    border-radius: 10px 10px 0 0;
+}
+
+.rating-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+}
+
+.rating-info {
+    background: linear-gradient(135deg, #17a2b8, #6f42c1);
+    color: white;
+}
+
+.rating-animation {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .rating-star {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .rating-stars .fa-star {
+        font-size: 1.5rem !important;
+    }
+}

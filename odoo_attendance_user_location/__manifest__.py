@@ -36,6 +36,7 @@
     'assets': {
         'web.assets_backend': [
             'odoo_attendance_user_location/static/src/js/my_attendances.js',
+            'odoo_attendance_user_location/static/src/xml/error_dialog.xml',
         ],
     },
     'images': ['static/description/banner.jpg'],

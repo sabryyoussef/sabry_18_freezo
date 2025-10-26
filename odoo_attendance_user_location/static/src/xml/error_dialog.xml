@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="odoo_attendance_user_location.ErrorDialog" owl="1">
+        <Dialog size="'medium'" title="props.title">
+            <div class="alert alert-danger" role="alert">
+                <t t-esc="props.body"/>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary" t-on-click="() => this.props.close()">
+                    OK
+                </button>
+            </t>
+        </Dialog>
+    </t>
+</templates>

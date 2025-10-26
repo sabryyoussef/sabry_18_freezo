@@ -283,6 +283,30 @@ class Task(models.Model):
             return stages.filtered(lambda s: project_id in s.project_ids)
         return stages
 
+    # Rating Methods for bwa_survey compatibility
+    def _rating_get_access_token(self):
+        """Generate access token for rating links"""
+        self.ensure_one()
+        if not self.partner_id:
+            return False
+        # Generate a simple access token based on task and partner
+        import hashlib
+        token_string = f"{self.id}_{self.partner_id.id}_{self.create_date}"
+        return hashlib.md5(token_string.encode()).hexdigest()
+
+    def _rating_get_partner(self):
+        """Get the partner/customer for rating"""
+        self.ensure_one()
+        return self.partner_id
+
+    def _rating_get_operator(self):
+        """Get the operator/assignee for rating"""
+        self.ensure_one()
+        # Return the main assignee (user_ids is a Many2many field)
+        if self.user_ids:
+            return self.user_ids[0]
+        return False
+
     # CRUD Methods
     @api.model_create_multi
     def create(self, vals_list):
