@@ -5,7 +5,10 @@
     "category": "Productivity/Documents",
     "version": "18.0.1.0.0",
     # any module necessary for this one to work correctly
-    "depends": ["base", "contacts", "project", "stock", "sale_subscription", "documents"],
+    "depends": ["base", "contacts", "project", "stock", 
+                # "sale_subscription",  # Enterprise module - temporarily disabled
+                # "documents"  # Enterprise module - temporarily disabled
+               ],
     # always loaded
     "data": [
         "security/security.xml",

@@ -8,10 +8,10 @@
         "base",
         "crm",
         "freezoner_custom",
-        "partner_organization",
-        "documents",
-        "crm_log",
-        "client_documents",
+        # "partner_organization",  # Enterprise module - temporarily disabled
+        # "documents",  # Enterprise module - temporarily disabled
+        # "crm_log",  # Enterprise module - temporarily disabled
+        # "client_documents",  # Depends on enterprise modules - temporarily disabled
     ],
     "data": [
         "security/security.xml",

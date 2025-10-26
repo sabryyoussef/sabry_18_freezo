@@ -16,4 +16,7 @@
         'views/milestone.xml',
         'views/views.xml',
     ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
 }
