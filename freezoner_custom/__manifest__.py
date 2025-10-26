@@ -8,60 +8,63 @@
     "depends": [
         "base",
         "mail",
-        "account",
-        "sale",
-        "project",
-        "web",
-        # TRIAL 4: Minimal dependencies - removed documents, hr_expense, crm
-        # "documents",  # TRIAL 4: Removed for minimal test
-        # "sale_project",  # TRIAL 4: Removed for minimal test
-        # "client_documents",  # TRIAL 5: Removed - checking if it has event references
-        # "hr_expense",  # TRIAL 4: Removed for minimal test
-        # "crm",  # TRIAL 4: Removed for minimal test
-        # "cabinet_directory",  # TRIAL 6: Removed - depends on calendar which references event
-        # "mass_mailing",  # TRIAL 2: Removed - might have event/calendar integration
-        # "survey",  # TRIAL 1: Removed - might require event/calendar functionality
-        # "event_stub",  # TRIAL 7: Removed - checking if stub module causes issues
+        # INCREMENT 1: Minimal base module - testing basic structure
+        # "account",  # Will add in Increment 2
+        # "documents",  # Will add in Increment 4
+        # "sale",  # Will add in Increment 2
+        # "sale_project",  # Will add in Increment 5
+        # "web",  # Will add in Increment 2
+        # "client_documents",  # Will add in Increment 6
+        # "hr_expense",  # Will add in Increment 7
+        # "project",  # Will add in Increment 2
+        # "crm",  # Will add in Increment 7
+        # "cabinet_directory",  # Will add in Increment 6
+        # "mass_mailing",  # Will add in Increment 8
+        # "calendar",  # Will add later - suspected cause of KeyError
+        # "survey",  # Will add in Increment 9
+        # "base_address_extended",  # Will add later - not available on Odoo.sh
     ],
     "data": [
-        "security/ir.model.access.csv",  # ALTERNATIVE 2: Fixed filename with minimal content
-        # "security/res_groups.xml",  # TRIAL 8: Temporarily removed to test
-        # TRIAL 4: Commented out most data files for minimal test
-        # "data/ir_sequence_data.xml",
-        # "data/cron.xml",
-        # "data/action.xml",
-        # "data/action_configure_email_servers.xml",
-        # "wizard/required_document_wizard.xml",
-        # "wizard/task_assignees_wizard.xml",
-        # "wizard/return_project_wizard.xml",
-        # "wizard/remarks_wizard.xml",
+        # INCREMENT 1: No data files - testing basic module structure
+        # "security/ir.model.access.csv",  # Will add in Increment 3
+        # "security/res_groups.xml",  # Will add in Increment 3
+        # "data/ir_sequence_data.xml",  # Will add in Increment 10
+        # "data/cron.xml",  # Will add in Increment 10
+        # "data/ir_sequence_data.xml",  # Will add in Increment 10
+        # "data/cron.xml",  # Will add in Increment 10
+        # "data/action.xml",  # Will add in Increment 10
+        # "data/action_configure_email_servers.xml",  # Will add in Increment 10
+        # "wizard/required_document_wizard.xml",  # Will add in Increment 10
+        # "wizard/task_assignees_wizard.xml",  # Will add in Increment 10
+        # "wizard/return_project_wizard.xml",  # Will add in Increment 10
+        # "wizard/remarks_wizard.xml",  # Will add in Increment 10
         # === GROUP 1: Document Views ===
-        # "views/document_request.xml",
-        # "views/documents.xml",  # Enabled - but problematic kanban views remain commented
-        # "views/document.xml",
+        # "views/document_request.xml",  # Will add in Increment 10
+        # "views/documents.xml",  # Will add in Increment 10
+        # "views/document.xml",  # Will add in Increment 10
         # === GROUP 2: Core Partner/Account/Product ===
-        # "views/partner.xml",
-        # "views/account_move.xml",
-        # "views/product.xml",
+        # "views/partner.xml",  # Will add in Increment 10
+        # "views/account_move.xml",  # Will add in Increment 10
+        # "views/product.xml",  # Will add in Increment 10
         # === GROUP 3: Project/Task/Expense ===
-        # "views/expense.xml",
-        # "views/project.xml",  # Complex - large file with many customizations
-        # "views/task.xml",     # Complex - large file with many customizations
+        # "views/expense.xml",  # Will add in Increment 10
+        # "views/project.xml",  # Will add in Increment 10
+        # "views/task.xml",  # Will add in Increment 10
         # === GROUP 4: CRM/Sale ===
-        # "views/crm.xml",
-        # "views/sale.xml",     # Complex - form inheritance with SOV and analytic items
-        # "views/sale_portal.xml",
-        # "views/rating.xml",
+        # "views/crm.xml",  # Will add in Increment 10
+        # "views/sale.xml",  # Will add in Increment 10
+        # "views/sale_portal.xml",  # Will add in Increment 10
+        # "views/rating.xml",  # Will add in Increment 10
         # === Data/Mail Files ===
-        # "data/mails.xml",
-        # "data/data.xml",
-        # "data/survey_mail.xml",  # TRIAL 1: Commented out - survey dependency removed
-        # "data/crm_mails.xml",
+        # "data/mails.xml",  # Will add in Increment 10
+        # "data/data.xml",  # Will add in Increment 10
+        # "data/survey_mail.xml",  # Will add in Increment 10
+        # "data/crm_mails.xml",  # Will add in Increment 10
         # === Wizards ===
-        # "wizard/task_wizard.xml",
-        # "wizard/task_next_wizard.xml",
-        # "wizard/sale_crm.xml",
-        # "wizard/update_fields.xml",
+        # "wizard/task_wizard.xml",  # Will add in Increment 10
+        # "wizard/task_next_wizard.xml",  # Will add in Increment 10
+        # "wizard/sale_crm.xml",  # Will add in Increment 10
+        # "wizard/update_fields.xml",  # Will add in Increment 10
     ],
     "assets": {
         "web.assets_backend": [
