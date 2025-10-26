@@ -17,7 +17,7 @@
         "hr_expense",
         "project",
         "crm",
-        "cabinet_directory",
+        # "cabinet_directory",  # TRIAL 6: Removed - depends on calendar which references event
         # "mass_mailing",  # TRIAL 2: Removed - might have event/calendar integration
         # "survey",  # TRIAL 1: Removed - might require event/calendar functionality
     ],
