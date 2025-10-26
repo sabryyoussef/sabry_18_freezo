@@ -19,7 +19,7 @@
         "crm",
         "cabinet_directory",
         "mass_mailing",
-        "survey",  # Required for rating functionality used by bwa_survey
+        # "survey",  # TRIAL 1: Removed - might require event/calendar functionality
     ],
     "data": [
         "security/ir.model.access.csv",
@@ -52,7 +52,7 @@
         # === Data/Mail Files ===
         "data/mails.xml",
         "data/data.xml",
-        "data/survey_mail.xml",
+        # "data/survey_mail.xml",  # TRIAL 1: Commented out - survey dependency removed
         "data/crm_mails.xml",
         # === Wizards ===
         "wizard/task_wizard.xml",
