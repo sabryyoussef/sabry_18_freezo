@@ -12,7 +12,6 @@
         "sale",
         "project",
         "web",
-        "event_stub",  # ALTERNATIVE 1: Stub event module to resolve KeyError
         # TRIAL 4: Minimal dependencies - removed documents, hr_expense, crm
         # "documents",  # TRIAL 4: Removed for minimal test
         # "sale_project",  # TRIAL 4: Removed for minimal test
@@ -22,10 +21,11 @@
         # "cabinet_directory",  # TRIAL 6: Removed - depends on calendar which references event
         # "mass_mailing",  # TRIAL 2: Removed - might have event/calendar integration
         # "survey",  # TRIAL 1: Removed - might require event/calendar functionality
+        # "event_stub",  # TRIAL 7: Removed - checking if stub module causes issues
     ],
     "data": [
         "security/ir.model.access.csv",  # ALTERNATIVE 2: Fixed filename with minimal content
-        "security/res_groups.xml",
+        # "security/res_groups.xml",  # TRIAL 8: Temporarily removed to test
         # TRIAL 4: Commented out most data files for minimal test
         # "data/ir_sequence_data.xml",
         # "data/cron.xml",
