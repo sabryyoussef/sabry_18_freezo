@@ -24,7 +24,7 @@
         # "survey",  # TRIAL 1: Removed - might require event/calendar functionality
     ],
     "data": [
-        "security/ir.model.access_part1.csv",  # ALTERNATIVE 2: Test with minimal CSV
+        "security/ir.model.access.csv",  # ALTERNATIVE 2: Fixed filename with minimal content
         "security/res_groups.xml",
         # TRIAL 4: Commented out most data files for minimal test
         # "data/ir_sequence_data.xml",
