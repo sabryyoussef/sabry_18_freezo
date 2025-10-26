@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents View Customizations - Odoo Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .feature-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .feature-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+        }
+        .code-block {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .nav-links {
+            margin-top: 20px;
+            padding: 10px;
+            background: #eee;
+            border-radius: 5px;
+        }
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Documents View Customizations</h1>
+
+    <div class="section">
+        <h2>Overview</h2>
+        <p>This documentation covers the customizations made to the Documents views in Odoo. These enhancements provide advanced document management features, improved sharing workflows, and better integration with partners, projects, and folders.</p>
+    </div>
+
+    <div class="section">
+        <h2>Key Customizations</h2>
+        <ul class="feature-list">
+            <li>Enhanced <strong>Document Form View</strong> with additional fields: <code>type_id</code>, <code>issue_date</code>, <code>expiration_date</code>, <code>project_id</code>, and improved partner selection.</li>
+            <li>Restricted quick creation and editing for key fields (e.g., <code>type_id</code>, <code>folder_id</code>, <code>owner_id</code>, <code>partner_id</code>).</li>
+            <li>Advanced <strong>Share Document</strong> form with options for sharing, scheduling activities, and sending emails.</li>
+            <li>Notebook pages for managing related documents and handover processes.</li>
+            <li>Improved domain and context for partner and project selection.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Major Features</h2>
+        <ul class="feature-list">
+            <li>Comprehensive document metadata management (type, issue/expiration dates, project, folder, owner, partner).</li>
+            <li>Controlled sharing and collaboration with advanced sharing forms and activity scheduling.</li>
+            <li>Notebook interface for organizing documents and handover records.</li>
+            <li>Enhanced security and data integrity by restricting quick creation/editing of related records.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Use Case Scenarios</h2>
+        <ul class="feature-list">
+            <li>Organizations can manage all document details, track expiration, and link documents to projects and partners.</li>
+            <li>Users can securely share documents, schedule follow-up activities, and send notifications directly from the document interface.</li>
+            <li>Administrators can ensure data consistency and prevent unauthorized creation of related records.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Technical Implementation</h2>
+        <ul class="feature-list">
+            <li>XML inheritance of standard document views and forms.</li>
+            <li>Use of <code>xpath</code> to add, move, and restrict fields and attributes.</li>
+            <li>Custom notebook pages and advanced form layouts for document and handover management.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Benefits</h2>
+        <ul class="feature-list">
+            <li>Improved document management and compliance tracking.</li>
+            <li>Streamlined sharing and collaboration workflows.</li>
+            <li>Greater control over document-related data and relationships.</li>
+        </ul>
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html">Back to Index</a>
+        <a href="document.html">Document View</a>
+        <a href="project.html">Project View</a>
+    </div>
+</body>
+</html> 

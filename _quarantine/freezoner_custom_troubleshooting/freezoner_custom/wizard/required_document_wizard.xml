@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="project_required_documents_wizard_form_view">
+        <field name="name">required.documents.wizard.form.view</field>
+        <field name="model">required.documents.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="">
+                    <group>
+                        <group>
+                            <field name="project_id" invisible="1" />
+                            <field name="name" required="1" placeholder="e.g. Missing Expense" />
+                        </group>
+                        <group>
+                            <field name="user_id" />
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_request" string="Request" type="object" default_focus="1"
+                        class="oe_highlight"
+                    />
+                    <!--                    <button name="action_upload" string="Upload" type="object"
+                    default_focus="1" class="oe_highlight"/>-->
+                    <button string="Cancel" class="btn btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Custom form view for documents.request_wizard to avoid issue_date requirements -->
+    <record model="ir.ui.view" id="documents_request_wizard_simple_form_view">
+        <field name="name">documents.request_wizard.simple.form</field>
+        <field name="model">documents.request_wizard</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1" />
+                            <field name="requestee_id" string="Request From" />
+                            <field name="partner_id" string="Related Contact" />
+                        </group>
+                        <group>
+                            <field name="folder_id" />
+                            <field name="project_id"
+                                invisible="context.get('default_project_id', False)" />
+                            <field name="type_id" string="Document Type" />
+                            <field name="issue_date" string="Issue Date" />
+                        </group>
+                    </group>
+                    <group string="Additional Options" invisible="1">
+                        <field name="activity_type_id" />
+                        <field name="tag_ids" widget="many2many_tags" />
+                        <field name="activity_note" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="request_document" string="Send Request" type="object"
+                        class="oe_highlight" default_focus="1" />
+                    <button string="Cancel" class="btn btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

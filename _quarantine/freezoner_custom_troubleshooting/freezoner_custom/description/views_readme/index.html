@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freezoner Custom Views Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .module-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .module-card {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .module-card:hover {
+            transform: translateY(-5px);
+        }
+        .module-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .module-card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .module-card a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .module-card a:hover {
+            background-color: #0056b3;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        .status.pending {
+            background-color: #ffd700;
+            color: #000;
+        }
+        .status.completed {
+            background-color: #28a745;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Freezoner Custom Views Documentation</h1>
+
+    <p>This documentation covers all customizations made to Odoo views in the Freezoner module. Each view has been enhanced with additional features and improved workflows to better serve specific business needs.</p>
+
+    <div class="module-list">
+        <!-- Account Move View -->
+        <div class="module-card">
+            <h3>Account Move View <span class="status completed">Completed</span></h3>
+            <p>Enhanced payment method tracking and status visualization for journal entries and invoices.</p>
+            <a href="account_move.html">View Documentation</a>
+        </div>
+
+        <!-- Task View -->
+        <div class="module-card">
+            <h3>Task View <span class="status completed">Completed</span></h3>
+            <p>Customized task management with document handling and enhanced project integration.</p>
+            <a href="task.html">View Documentation</a>
+        </div>
+
+        <!-- Project View -->
+        <div class="module-card">
+            <h3>Project View <span class="status completed">Completed</span></h3>
+            <p>Enhanced project management with custom stages and document requirements.</p>
+            <a href="project.html">View Documentation</a>
+        </div>
+
+        <!-- Document View -->
+        <div class="module-card">
+            <h3>Document View <span class="status completed">Completed</span></h3>
+            <p>Customized document management with expiration tracking and verification workflow.</p>
+            <a href="document.html">View Documentation</a>
+        </div>
+
+        <!-- Sale View -->
+        <div class="module-card">
+            <h3>Sale View <span class="status completed">Completed</span></h3>
+            <p>Enhanced sales order management with document requirements and project integration.</p>
+            <a href="sale.html">View Documentation</a>
+        </div>
+
+        <!-- Partner View -->
+        <div class="module-card">
+            <h3>Partner View <span class="status completed">Completed</span></h3>
+            <p>Customized partner management with document requirements and verification status.</p>
+            <a href="partner.html">View Documentation</a>
+        </div>
+
+        <!-- Product View -->
+        <div class="module-card">
+            <h3>Product View <span class="status completed">Completed</span></h3>
+            <p>Enhanced product management with document type requirements and partner fields.</p>
+            <a href="product.html">View Documentation</a>
+        </div>
+
+        <!-- Rating View -->
+        <div class="module-card">
+            <h3>Rating View <span class="status completed">Completed</span></h3>
+            <p>Customized rating system with priority tracking and enhanced visualization.</p>
+            <a href="rating.html">View Documentation</a>
+        </div>
+
+        <!-- Document Request View -->
+        <div class="module-card">
+            <h3>Document Request View <span class="status completed">Completed</span></h3>
+            <p>Enhanced document request workflow with custom fields and validation.</p>
+            <a href="document_request.html">View Documentation</a>
+        </div>
+
+        <!-- Sale Portal View -->
+        <div class="module-card">
+            <h3>Sale Portal View <span class="status completed">Completed</span></h3>
+            <p>Customized portal interface for sales-related operations.</p>
+            <a href="sale_portal.html">View Documentation</a>
+        </div>
+
+        <!-- Sign View -->
+        <div class="module-card">
+            <h3>Sign View <span class="status completed">Completed</span></h3>
+            <p>Enhanced document signing interface with custom fields and workflow.</p>
+            <a href="sign.html">View Documentation</a>
+        </div>
+
+        <!-- CRM View -->
+        <div class="module-card">
+            <h3>CRM View <span class="status completed">Completed</span></h3>
+            <p>Customized CRM interface with enhanced lead and opportunity management.</p>
+            <a href="crm.html">View Documentation</a>
+        </div>
+
+        <!-- Expense View -->
+        <div class="module-card">
+            <h3>Expense View <span class="status completed">Completed</span></h3>
+            <p>Enhanced expense management with custom fields and validation.</p>
+            <a href="expense.html">View Documentation</a>
+        </div>
+
+        <!-- Documents View -->
+        <div class="module-card">
+            <h3>Documents View <span class="status completed">Completed</span></h3>
+            <p>Comprehensive document management system with custom fields and workflow.</p>
+            <a href="documents.html">View Documentation</a>
+        </div>
+
+        <!-- Calendar View -->
+        <div class="module-card">
+            <h3>Calendar View <span class="status completed">Completed</span></h3>
+            <p>Enhanced calendar management with custom event handling and integration.</p>
+            <a href="calendar.html">View Documentation</a>
+        </div>
+
+        <!-- Kanban View -->
+        <div class="module-card">
+            <h3>Kanban View <span class="status completed">Completed</span></h3>
+            <p>Enhanced Kanban view with custom fields and workflow.</p>
+            <a href="kanban.html">View Documentation</a>
+        </div>
+
+        <!-- Form View -->
+        <div class="module-card">
+            <h3>Form View <span class="status completed">Completed</span></h3>
+            <p>Enhanced form customization with custom fields and workflow.</p>
+            <a href="form.html">View Documentation</a>
+        </div>
+
+        <!-- Tree View -->
+        <div class="module-card">
+            <h3>Tree View <span class="status completed">Completed</span></h3>
+            <p>Enhanced tree view customization with custom fields and workflow.</p>
+            <a href="tree.html">View Documentation</a>
+        </div>
+
+        <!-- Search View -->
+        <div class="module-card">
+            <h3>Search View <span class="status completed">Completed</span></h3>
+            <p>Enhanced search functionality with custom fields and workflow.</p>
+            <a href="search.html">View Documentation</a>
+        </div>
+    </div>
+
+    <footer style="margin-top: 40px; text-align: center; color: #666;">
+        <p>Last updated: <span id="last-updated"></span></p>
+    </footer>
+
+    <script>
+        document.getElementById('last-updated').textContent = new Date().toLocaleDateString();
+    </script>
+</body>
+</html>

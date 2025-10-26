@@ -8,63 +8,59 @@
     "depends": [
         "base",
         "mail",
-        # INCREMENT 1: Minimal base module - testing basic structure
-        # "account",  # Will add in Increment 2
-        # "documents",  # Will add in Increment 4
-        # "sale",  # Will add in Increment 2
-        # "sale_project",  # Will add in Increment 5
-        # "web",  # Will add in Increment 2
-        # "client_documents",  # Will add in Increment 6
-        # "hr_expense",  # Will add in Increment 7
-        # "project",  # Will add in Increment 2
-        # "crm",  # Will add in Increment 7
-        # "cabinet_directory",  # Will add in Increment 6
-        # "mass_mailing",  # Will add in Increment 8
-        # "calendar",  # Will add later - suspected cause of KeyError
-        # "survey",  # Will add in Increment 9
-        # "base_address_extended",  # Will add later - not available on Odoo.sh
+        "account",
+        "documents",
+        "sale",
+        "sale_project",
+        "web",
+        "client_documents",
+        "hr_expense",
+        "project",
+        "crm",
+        "cabinet_directory",
+        "mass_mailing",
+        "calendar",  # Required: Some dependency module references calendar fields during initialization
+        "survey",  # Required for rating functionality used by bwa_survey
+        "base_address_extended",  # Required for proper partner form inheritance order
     ],
     "data": [
-        # INCREMENT 1: No data files - testing basic module structure
-        # "security/ir.model.access.csv",  # Will add in Increment 3
-        # "security/res_groups.xml",  # Will add in Increment 3
-        # "data/ir_sequence_data.xml",  # Will add in Increment 10
-        # "data/cron.xml",  # Will add in Increment 10
-        # "data/ir_sequence_data.xml",  # Will add in Increment 10
-        # "data/cron.xml",  # Will add in Increment 10
-        # "data/action.xml",  # Will add in Increment 10
-        # "data/action_configure_email_servers.xml",  # Will add in Increment 10
-        # "wizard/required_document_wizard.xml",  # Will add in Increment 10
-        # "wizard/task_assignees_wizard.xml",  # Will add in Increment 10
-        # "wizard/return_project_wizard.xml",  # Will add in Increment 10
-        # "wizard/remarks_wizard.xml",  # Will add in Increment 10
+        "security/ir.model.access.csv",
+        "security/res_groups.xml",
+        "data/ir_sequence_data.xml",
+        "data/cron.xml",
+        "data/action.xml",
+        "data/action_configure_email_servers.xml",
+        "wizard/required_document_wizard.xml",
+        "wizard/task_assignees_wizard.xml",
+        "wizard/return_project_wizard.xml",
+        "wizard/remarks_wizard.xml",
         # === GROUP 1: Document Views ===
-        # "views/document_request.xml",  # Will add in Increment 10
-        # "views/documents.xml",  # Will add in Increment 10
-        # "views/document.xml",  # Will add in Increment 10
+        "views/document_request.xml",
+        "views/documents.xml",  # Enabled - but problematic kanban views remain commented
+        "views/document.xml",
         # === GROUP 2: Core Partner/Account/Product ===
-        # "views/partner.xml",  # Will add in Increment 10
-        # "views/account_move.xml",  # Will add in Increment 10
-        # "views/product.xml",  # Will add in Increment 10
+        "views/partner.xml",
+        "views/account_move.xml",
+        "views/product.xml",
         # === GROUP 3: Project/Task/Expense ===
-        # "views/expense.xml",  # Will add in Increment 10
-        # "views/project.xml",  # Will add in Increment 10
-        # "views/task.xml",  # Will add in Increment 10
+        "views/expense.xml",
+        "views/project.xml",  # Complex - large file with many customizations
+        "views/task.xml",     # Complex - large file with many customizations
         # === GROUP 4: CRM/Sale ===
-        # "views/crm.xml",  # Will add in Increment 10
-        # "views/sale.xml",  # Will add in Increment 10
-        # "views/sale_portal.xml",  # Will add in Increment 10
-        # "views/rating.xml",  # Will add in Increment 10
+        "views/crm.xml",
+        "views/sale.xml",     # Complex - form inheritance with SOV and analytic items
+        "views/sale_portal.xml",
+        "views/rating.xml",
         # === Data/Mail Files ===
-        # "data/mails.xml",  # Will add in Increment 10
-        # "data/data.xml",  # Will add in Increment 10
-        # "data/survey_mail.xml",  # Will add in Increment 10
-        # "data/crm_mails.xml",  # Will add in Increment 10
+        "data/mails.xml",
+        "data/data.xml",
+        "data/survey_mail.xml",
+        "data/crm_mails.xml",
         # === Wizards ===
-        # "wizard/task_wizard.xml",  # Will add in Increment 10
-        # "wizard/task_next_wizard.xml",  # Will add in Increment 10
-        # "wizard/sale_crm.xml",  # Will add in Increment 10
-        # "wizard/update_fields.xml",  # Will add in Increment 10
+        "wizard/task_wizard.xml",
+        "wizard/task_next_wizard.xml",
+        "wizard/sale_crm.xml",
+        "wizard/update_fields.xml",
     ],
     "assets": {
         "web.assets_backend": [

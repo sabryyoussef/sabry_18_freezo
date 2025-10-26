@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Set noupdate=True for the sale_menu_root menu -->
+    <record id="sale.sale_menu_root" model="ir.ui.menu">
+        <field name="name">Pro-forma Invoice</field>
+        <field name="active" eval="True" />
+    </record>
+</odoo>

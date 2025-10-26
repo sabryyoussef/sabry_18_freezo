@@ -175,7 +175,6 @@ The Level 0 modules are grouped by functional area for easier scanning. Each tab
 | bwa_email_conf | `bwa_email_conf/__manifest__.py` | ['base','mail'] |
 | odoo_whatsapp_integration | `_quarantine/odoo_whatsapp_integration/__manifest__.py` | ['account','base','contacts','purchase','sale','stock','web'] |
 | odoo_attendance_user_location | `_quarantine/odoo_attendance_user_location/__manifest__.py` | ['base','hr','hr_attendance'] |
-| prt_email_from | `prt_email_from/__manifest__.py` | ['mail'] |
 
 </details>
 

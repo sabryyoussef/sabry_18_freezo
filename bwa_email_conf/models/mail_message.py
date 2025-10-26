@@ -165,8 +165,8 @@ class CustomMailThread(models.AbstractModel):
     #     print(' new_message  ===>  ', new_message)
     #     return new_message
 
-    def _notify_get_reply_to_formatted_email(self, record_email, record_name):
-        company = self.env["res.company"].get_active_company()
+    def _notify_get_reply_to_formatted_email(self, record_email, record_name, company=None, **kwargs):
+        company = company or self.env["res.company"].get_active_company()
         # name = " ".join((" ".join(company_name), record_name)).rstrip()
         name = self.env.user.name
         return tools.formataddr(

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban View Customization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .comparison-box {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .code-block {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+        .use-case {
+            background-color: #e8f4f8;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kanban View Customization</h1>
+    
+    <div class="section">
+        <h2>Overview</h2>
+        <p>The kanban view has been enhanced with several customizations to improve project and task management. These enhancements include payment status indicators, project linking, and improved task organization.</p>
+    </div>
+
+    <div class="section">
+        <h2>Key Customizations</h2>
+        
+        <div class="comparison">
+            <div class="comparison-box">
+                <h3>Standard Odoo Kanban View</h3>
+                <ul>
+                    <li>Basic task organization</li>
+                    <li>Standard status tracking</li>
+                    <li>Limited project integration</li>
+                    <li>Basic task management</li>
+                </ul>
+            </div>
+            
+            <div class="comparison-box">
+                <h3>Enhanced Kanban View</h3>
+                <ul>
+                    <li>Payment status indicators</li>
+                    <li>Direct project linking</li>
+                    <li>Improved task organization</li>
+                    <li>Enhanced visual feedback</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Major Features</h2>
+        
+        <div class="code-block">
+            <h3>Payment Status Indicators</h3>
+            <pre>&lt;widget name="web_ribbon" title="Not Paid" bg_color="bg-danger"
+    modifiers="{'invisible': [('sale_payment_status', '!=', 'Not Paid')]}" /&gt;
+&lt;widget name="web_ribbon" title="Paid" bg_color="bg-success"
+    modifiers="{'invisible': [('sale_payment_status', '!=', 'Paid')]}" /&gt;
+&lt;widget name="web_ribbon" title="Partially Paid" bg_color="bg-warning"
+    modifiers="{'invisible': [('sale_payment_status', '!=', 'Partially Paid')]}" /&gt;
+&lt;widget name="web_ribbon" title="In Payment" bg_color="bg-info"
+    modifiers="{'invisible': [('sale_payment_status', '!=', 'In Payment')]}" /&gt;
+&lt;widget name="web_ribbon" title="Reversed" bg_color="bg-success"
+    modifiers="{'invisible': [('sale_payment_status', '!=', 'Reversed')]}" /&gt;</pre>
+        </div>
+
+        <div class="code-block">
+            <h3>Project Linking</h3>
+            <pre>&lt;a t-if="record.project_id.raw_value"
+    t-attf-href="/web#id={{record.project_id.raw_value}}&amp;model=project.project&amp;view_type=form"
+    class="o_kanban_record_title"
+    style="font-weight: bold; color: green;"&gt;
+    View Project
+&lt;/a&gt;</pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Use Case Scenarios</h2>
+
+        <div class="use-case">
+            <h3>Scenario 1: Project Status Tracking</h3>
+            <ol>
+                <li>View project cards in kanban view</li>
+                <li>Quickly identify payment status through colored ribbons</li>
+                <li>Access project details through direct links</li>
+                <li>Monitor project progress</li>
+            </ol>
+        </div>
+
+        <div class="use-case">
+            <h3>Scenario 2: Task Management</h3>
+            <ol>
+                <li>Organize tasks in kanban columns</li>
+                <li>Track task progress through stages</li>
+                <li>Access related project information</li>
+                <li>Manage task assignments</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Technical Implementation</h2>
+        <ul>
+            <li>Custom kanban view inheritance</li>
+            <li>Payment status ribbon widgets</li>
+            <li>Project linking functionality</li>
+            <li>Enhanced task organization</li>
+            <li>Improved visual feedback</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Benefits</h2>
+        <ul>
+            <li>Improved project status visibility</li>
+            <li>Enhanced task organization</li>
+            <li>Better project-task relationship management</li>
+            <li>Streamlined workflow</li>
+            <li>Better user experience</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Navigation</h2>
+        <p><a href="index.html">Back to Index</a></p>
+    </div>
+</body>
+</html> 

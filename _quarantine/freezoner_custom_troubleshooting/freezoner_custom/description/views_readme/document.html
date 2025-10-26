@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document View Customization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .comparison-box {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .code-block {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+        .use-case {
+            background-color: #e8f4f8;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Document View Customization</h1>
+    
+    <div class="section">
+        <h2>Overview</h2>
+        <p>This customization enhances the standard Odoo Document view by adding task stage management functionality directly from the document list view.</p>
+    </div>
+
+    <div class="section">
+        <h2>Key Customizations</h2>
+        
+        <div class="comparison">
+            <div class="comparison-box">
+                <h3>Standard Odoo Document View</h3>
+                <ul>
+                    <li>Basic document listing</li>
+                    <li>Standard document management</li>
+                    <li>No direct task stage control</li>
+                    <li>Separate task management required</li>
+                </ul>
+            </div>
+            
+            <div class="comparison-box">
+                <h3>Customized Document View</h3>
+                <ul>
+                    <li>Direct task stage management</li>
+                    <li>Quick task completion from document view</li>
+                    <li>Streamlined workflow integration</li>
+                    <li>Enhanced document-task relationship</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Major Features</h2>
+        <div class="code-block">
+            <h3>Task Stage Management Button</h3>
+            <pre>&lt;header&gt;
+    &lt;button name="move_task_stage" type="object" string="Move Task To Done"/&gt;
+&lt;/header&gt;</pre>
+        </div>
+        <p>This customization adds a "Move Task To Done" button in the document list view header, allowing users to:</p>
+        <ul>
+            <li>Quickly mark associated tasks as complete</li>
+            <li>Streamline document-task workflow</li>
+            <li>Reduce navigation between views</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Use Case Scenarios</h2>
+
+        <div class="use-case">
+            <h3>Scenario 1: Document Review and Task Completion</h3>
+            <ol>
+                <li>Review documents in the list view</li>
+                <li>Verify document completion</li>
+                <li>Use "Move Task To Done" button to mark associated task as complete</li>
+                <li>Continue with next document review</li>
+            </ol>
+        </div>
+
+        <div class="use-case">
+            <h3>Scenario 2: Batch Document Processing</h3>
+            <ol>
+                <li>Select multiple documents</li>
+                <li>Review document contents</li>
+                <li>Use the button to mark all associated tasks as complete</li>
+                <li>Track task completion status</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Technical Implementation</h2>
+        <ul>
+            <li>Custom button in document list view header</li>
+            <li>Task stage management functionality</li>
+            <li>Integration with task workflow</li>
+            <li>Enhanced user interface for document-task relationship</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Benefits</h2>
+        <ul>
+            <li>Streamlined document-task workflow</li>
+            <li>Reduced navigation between views</li>
+            <li>Improved efficiency in document processing</li>
+            <li>Better task completion tracking</li>
+            <li>Enhanced user experience</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Navigation</h2>
+        <p><a href="index.html">Back to Index</a></p>
+    </div>
+</body>
+</html> 

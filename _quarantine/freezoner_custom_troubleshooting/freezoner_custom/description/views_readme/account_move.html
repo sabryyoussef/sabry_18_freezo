@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freezoner Custom Views Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .module {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .feature {
+            background-color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .use-case {
+            background-color: #e8f4f8;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .code-block {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Freezoner Custom Views Documentation</h1>
+
+    <h2>Overview</h2>
+    <p>This documentation covers the customizations made to various Odoo views in the Freezoner module. These customizations enhance the standard Odoo functionality with additional features and improved workflows.</p>
+
+    <div class="module">
+        <h2>1. Task Management (task.xml)</h2>
+
+        <div class="feature">
+            <h3>Enhanced Kanban View</h3>
+            <p>Added a "View Project" quick access link in the task kanban view for better navigation.</p>
+            <div class="code-block">
+                <pre>&lt;a t-if="record.project_id.raw_value"
+   t-attf-href="/web#id={{record.project_id.raw_value}}&amp;model=project.project&amp;view_type=form"
+   class="o_kanban_record_title"
+   style="font-weight: bold; color: green;"&gt;
+    View Project
+&lt;/a&gt;</pre>
+            </div>
+        </div>
+
+        <div class="feature">
+            <h3>Document Management Integration</h3>
+            <ul>
+                <li>Added document upload and management directly in tasks</li>
+                <li>Document expiration tracking</li>
+                <li>Document verification workflow</li>
+                <li>Partner-specific document requirements</li>
+            </ul>
+        </div>
+
+        <div class="use-case">
+            <h3>Use Case: Document Collection Workflow</h3>
+            <ol>
+                <li>Create a task for document collection</li>
+                <li>Specify required documents with expiration dates</li>
+                <li>Upload and verify documents</li>
+                <li>Track document status and completion</li>
+                <li>Move task to next stage when all documents are verified</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="module">
+        <h2>2. Project Management (project.xml)</h2>
+
+        <div class="feature">
+            <h3>Custom Project Views</h3>
+            <ul>
+                <li>Enhanced project stages with payment status indicators</li>
+                <li>Custom project task management</li>
+                <li>Document management integration</li>
+                <li>Team-specific project views</li>
+            </ul>
+        </div>
+
+        <div class="use-case">
+            <h3>Use Case: Project Setup and Management</h3>
+            <ol>
+                <li>Create a new project with specific requirements</li>
+                <li>Assign team members and set up tasks</li>
+                <li>Track document requirements and status</li>
+                <li>Monitor project progress through stages</li>
+                <li>Manage project deliverables and documentation</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="module">
+        <h2>3. Document Management (documents.xml)</h2>
+
+        <div class="feature">
+            <h3>Enhanced Document Views</h3>
+            <ul>
+                <li>Custom document type management</li>
+                <li>Document expiration tracking</li>
+                <li>Partner-specific document requirements</li>
+                <li>Document verification workflow</li>
+            </ul>
+        </div>
+
+        <div class="use-case">
+            <h3>Use Case: Document Lifecycle Management</h3>
+            <ol>
+                <li>Define document types and requirements</li>
+                <li>Upload and categorize documents</li>
+                <li>Track document expiration dates</li>
+                <li>Verify document compliance</li>
+                <li>Manage document access and sharing</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="module">
+        <h2>4. Sales Management (sale.xml)</h2>
+
+        <div class="feature">
+            <h3>Custom Sales Views</h3>
+            <ul>
+                <li>Enhanced sales order management</li>
+                <li>Document requirement tracking</li>
+                <li>Project integration</li>
+                <li>Custom reporting views</li>
+            </ul>
+        </div>
+
+        <div class="use-case">
+            <h3>Use Case: Sales Process with Document Requirements</h3>
+            <ol>
+                <li>Create sales order with document requirements</li>
+                <li>Track required documents for the sale</li>
+                <li>Manage document collection and verification</li>
+                <li>Link sales to projects and tasks</li>
+                <li>Monitor sales progress and documentation status</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="module">
+        <h2>5. Partner Management (partner.xml)</h2>
+
+        <div class="feature">
+            <h3>Enhanced Partner Views</h3>
+            <ul>
+                <li>Document requirement tracking per partner</li>
+                <li>Custom partner fields</li>
+                <li>Document verification status</li>
+                <li>Partner-specific workflows</li>
+            </ul>
+        </div>
+
+        <div class="use-case">
+            <h3>Use Case: Partner Onboarding</h3>
+            <ol>
+                <li>Create new partner record</li>
+                <li>Define required documents for the partner</li>
+                <li>Track document collection and verification</li>
+                <li>Monitor partner compliance status</li>
+                <li>Manage partner-specific requirements</li>
+            </ol>
+        </div>
+    </div>
+
+    <h2>Technical Implementation</h2>
+    <p>The customizations are implemented through XML view inheritance, extending the standard Odoo views with additional functionality. Key technical features include:</p>
+    <ul>
+        <li>Custom status bar widgets for stage management</li>
+        <li>Document management integration with binary file handling</li>
+        <li>Partner-specific document requirements tracking</li>
+        <li>Enhanced kanban views with quick access features</li>
+        <li>Custom action buttons and workflows</li>
+    </ul>
+
+    <h2>Benefits</h2>
+    <ul>
+        <li>Streamlined document management workflow</li>
+        <li>Improved project-task navigation</li>
+        <li>Enhanced stage management</li>
+        <li>Better document verification process</li>
+        <li>Improved user experience with quick access features</li>
+        <li>Comprehensive partner and document tracking</li>
+    </ul>
+</body>
+</html>

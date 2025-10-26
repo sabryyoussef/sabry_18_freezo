@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner View Customizations - Odoo Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .feature-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .feature-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+        }
+        .code-block {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .nav-links {
+            margin-top: 20px;
+            padding: 10px;
+            background: #eee;
+            border-radius: 5px;
+        }
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Partner View Customizations</h1>
+
+    <div class="section">
+        <h2>Overview</h2>
+        <p>This documentation covers the customizations made to the Partner (res.partner) form view in Odoo. The main enhancement is the addition of a new "Products" tab, allowing users to associate products with partners and manage related information efficiently.</p>
+    </div>
+
+    <div class="section">
+        <h2>Key Customizations</h2>
+        <ul class="feature-list">
+            <li>Addition of a new <strong>Products</strong> tab to the partner form view.</li>
+            <li>Display and manage <code>project_product_ids</code> related to the partner.</li>
+            <li>Support for listing project, product, date range, and remarks (future extensibility).</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Major Features</h2>
+        <ul class="feature-list">
+            <li>Centralized management of products associated with each partner.</li>
+            <li>Easy access to product-related information from the partner form.</li>
+            <li>Potential for tracking project-product relationships and remarks.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Use Case Scenarios</h2>
+        <ul class="feature-list">
+            <li>Sales and account managers can quickly view and manage products linked to a partner.</li>
+            <li>Project managers can track which products are associated with which partners for specific projects.</li>
+            <li>Support and service teams can reference product associations for better customer service.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Technical Implementation</h2>
+        <ul class="feature-list">
+            <li>XML inheritance of the standard partner form view (<code>base.view_partner_form</code>).</li>
+            <li>Insertion of a new page/tab after the "Internal Notes" tab using <code>xpath</code>.</li>
+            <li>Display of <code>project_product_ids</code> in a list view within the new tab.</li>
+            <li>Commented fields for future extensibility (project, product, date range, remarks).</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Benefits</h2>
+        <ul class="feature-list">
+            <li>Improved partner management and visibility of product associations.</li>
+            <li>Streamlined workflow for sales, project, and support teams.</li>
+            <li>Foundation for further customization and integration with other modules.</li>
+        </ul>
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html">Back to Index</a>
+        <a href="task.html">Task View</a>
+        <a href="project.html">Project View</a>
+        <a href="form.html">Form View</a>
+    </div>
+</body>
+</html> 
