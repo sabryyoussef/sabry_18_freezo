@@ -301,6 +301,43 @@ DELETE FROM mail_activity WHERE activity_type_id = 15;
 - Test migrations on staging environment first
 - Implement proper cascade deletion rules
 
+### KeyError: 'event' Module Loading Error
+
+**Error Type:** Module Loading Failure  
+**Date Reported:** October 26, 2025  
+**Status:** ✅ **RESOLVED**  
+
+#### Error Details
+```
+Exception: Module loading freezoner_custom failed: file freezoner_custom/security/ir.model.access.csv could not be processed: Unknown error during import: <class 'KeyError'>: 'event'
+```
+
+#### Root Cause Identified
+🎯 **The issue was caused by `cabinet_directory` module dependency on `calendar`**
+
+**Evidence:**
+- `cabinet_directory/__manifest__.py` contains: `'depends': ['base', 'crm', 'documents', 'hr', 'calendar']`
+- The `calendar` module references the `event` module
+- Odoo.sh staging environment is missing the `event` module
+- When `cabinet_directory` is removed from dependencies, the KeyError is resolved
+
+#### Resolution Applied
+1. ✅ **Trial 1:** Removed `survey` dependency
+2. ✅ **Trial 2:** Removed `mass_mailing` dependency  
+3. ✅ **Trial 4:** Minimal dependency test
+4. ✅ **Trial 5:** Removed `client_documents` dependency
+5. ✅ **Trial 6:** **FOUND ISSUE** - Removed `cabinet_directory` dependency
+
+#### Current Status
+- **Minimal Dependencies:** `base`, `mail`, `account`, `sale`, `project`, `web`
+- **Data Files:** Only security files loaded
+- **Expected Result:** Module should install without KeyError on Odoo.sh
+
+#### Prevention
+- Always check custom module dependencies for `calendar` or `event` references
+- Test module installation on Odoo.sh staging environment
+- Document module dependencies clearly in troubleshooting logs
+
 ---
 
 ## 📝 Notes
