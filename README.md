@@ -250,15 +250,69 @@ The Level 1 modules are grouped functionally to clarify why they require Level 0
 
 ---
 
+## ⚠️ Known Issues & Troubleshooting
+
+### Database Constraint Violation Error
+
+**Error Type:** Foreign Key Constraint Violation  
+**Date Reported:** October 26, 2025  
+**Status:** 🔴 Active Issue  
+
+#### Error Details
+```
+ERROR: update or delete on table "mail_activity_type" violates foreign key constraint "mail_activity_activity_type_id_fkey" on table "mail_activity"
+DETAIL: Key (id)=(15) is still referenced from table "mail_activity".
+```
+
+#### Root Cause
+This error occurs during the upgrade of the `documents` module migration script:
+- **Migration File:** `/migrations/documents/saas~17.5.1.4/end-migrate.py` (line 170)
+- **Action:** Migration attempts to remove `documents.share` model
+- **Constraint:** Foreign key constraint prevents deletion of `mail_activity_type` with ID=15
+- **Reference:** `mail_activity` records still reference this activity type
+
+#### Impact
+- ❌ Module upgrade fails
+- ❌ Database initialization fails
+- ❌ Odoo.sh deployment blocked
+- ❌ Registry loading fails
+
+#### Solutions
+
+**Option 1: Database Cleanup (Recommended)**
+```sql
+-- Remove orphaned mail activities that reference the problematic activity type
+DELETE FROM mail_activity WHERE activity_type_id = 15;
+
+-- Then retry the module upgrade
+```
+
+**Option 2: Manual Migration Fix**
+- Update migration script to handle constraint before model removal
+- Add proper cleanup sequence in migration
+
+**Option 3: Skip Problematic Migration**
+- Temporarily disable migration
+- Handle cleanup manually
+- Re-enable after cleanup
+
+#### Prevention
+- Always clean up foreign key references before model deletion
+- Test migrations on staging environment first
+- Implement proper cascade deletion rules
+
+---
+
 ## 📝 Notes
 
 - All modules are configured with `auto_install: False`
 - Module versions updated to 17.0
 - Known issues documented in migration playbook
 - For deployment strategies, see migration playbook
+- **Database constraint issues require manual intervention**
 
 ---
 
-**Last Updated:** October 2025  
+**Last Updated:** October 26, 2025  
 **Maintained By:** Freezoner Team  
 **Odoo Version:** 17.0
