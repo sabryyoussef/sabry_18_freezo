@@ -13,7 +13,7 @@
         "sale",
         "sale_project",
         "web",
-        "client_documents",
+        # "client_documents",  # TRIAL 5: Removed - checking if it has event references
         "hr_expense",
         "project",
         "crm",
