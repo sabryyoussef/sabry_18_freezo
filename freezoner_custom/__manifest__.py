@@ -18,7 +18,7 @@
         "project",
         "crm",
         "cabinet_directory",
-        "mass_mailing",
+        # "mass_mailing",  # TRIAL 2: Removed - might have event/calendar integration
         # "survey",  # TRIAL 1: Removed - might require event/calendar functionality
     ],
     "data": [
