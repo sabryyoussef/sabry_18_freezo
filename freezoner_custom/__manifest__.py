@@ -21,7 +21,7 @@
         "mass_mailing",
         "calendar",  # Required: Some dependency module references calendar fields during initialization
         "survey",  # Required for rating functionality used by bwa_survey
-        "base_address_extended",  # Required for proper partner form inheritance order
+        # "base_address_extended",  # Temporarily removed to test module without view inheritance conflicts
     ],
     "data": [
         "security/ir.model.access.csv",
