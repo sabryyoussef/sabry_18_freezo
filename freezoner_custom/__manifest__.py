@@ -12,6 +12,7 @@
         "sale",
         "project",
         "web",
+        "event_stub",  # ALTERNATIVE 1: Stub event module to resolve KeyError
         # TRIAL 4: Minimal dependencies - removed documents, hr_expense, crm
         # "documents",  # TRIAL 4: Removed for minimal test
         # "sale_project",  # TRIAL 4: Removed for minimal test
