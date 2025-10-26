@@ -118,6 +118,18 @@
 **Result:** Fixed CSV filename issue  
 **Notes:** Odoo requires CSV files to be named `ir.model.access.csv` specifically. Now testing with minimal content.
 
+### Trial 7: Remove Event Stub and Res Groups
+**Status:** ✅ Completed  
+**Description:** Remove event_stub dependency and res_groups.xml to isolate KeyError  
+**Actions:**
+- [x] Remove `event_stub` from dependencies
+- [x] Comment out `security/res_groups.xml` from data files
+- [x] Push to staging1 branch
+- [ ] Test CSV import on Odoo.sh
+
+**Result:** Testing with absolute minimal configuration  
+**Notes:** Only CSV file remains in data files. Testing if event_stub or res_groups.xml was causing the issue.
+
 ### Alternative 3: Contact Odoo.sh Support
 **Status:** ⏳ Pending  
 **Description:** Document all trials and create support ticket  
