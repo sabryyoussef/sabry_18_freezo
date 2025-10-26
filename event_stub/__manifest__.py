@@ -14,7 +14,7 @@
     """,
     'depends': ['base'],
     'data': [
-        'security/ir.model.access.csv',
+        # No data files needed - just model definitions
     ],
     'installable': True,
     'application': False,
