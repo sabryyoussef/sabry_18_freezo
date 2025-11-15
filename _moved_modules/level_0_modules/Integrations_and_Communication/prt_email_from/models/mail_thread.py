@@ -27,13 +27,13 @@ class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
     def _notify_get_reply_to_formatted_email(
-        self, record_email, record_name, company=None, **kwargs
+        self, record_email, record_name, **kwargs
     ):
         """Custom prepare reply to email by company configuration"""
-        company = company or self.env.company
+        company = kwargs.get('company') or self.env.company
         if not getattr(company, "add_sender_reply_to", False):
             return super()._notify_get_reply_to_formatted_email(
-                record_email, record_name, company=company, **kwargs
+                record_email, record_name, **kwargs
             )
         company_name = [self.env.user.name, company.name]
         if getattr(company, "email_joint", False):
