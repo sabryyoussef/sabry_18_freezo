@@ -10,7 +10,7 @@
     ],
     'external_dependencies': {'python': ['geopy', 'getmac']},
     'license': 'AGPL-3',
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }

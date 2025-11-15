@@ -12,7 +12,7 @@
     "external_dependencies": {"python": ["xlsxwriter", "xlrd"]},
     "depends": ["base", "web"],
     "demo": ["demo/report.xml"],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
     "assets": {
         "web.assets_backend": [
