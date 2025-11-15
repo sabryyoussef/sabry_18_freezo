@@ -15,8 +15,7 @@
                        style="width: 60%"/>
                 <field name="amount_due"/>
             </xpath>
-            <xpath expr="//sheet//div[hasclass('oe_button_box')]"
-                   position="after">
+            <xpath expr="//div[@name='button_box']" position="after">
                 <widget name="web_ribbon" title="Not Paid"
                         bg_color="bg-danger" invisible = "payment_status != 'Not Paid'"/>
                 <widget name="web_ribbon" title="Paid"

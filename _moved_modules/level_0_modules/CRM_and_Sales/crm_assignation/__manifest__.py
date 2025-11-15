@@ -8,7 +8,7 @@
     'version': '1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'crm'],
+    'depends': ['base', 'crm', 'sale_crm'],  # Added sale_crm dependency
 
     # always loaded
     'data': [
