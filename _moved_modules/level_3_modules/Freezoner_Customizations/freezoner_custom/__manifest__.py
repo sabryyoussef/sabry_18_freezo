@@ -9,7 +9,10 @@
         "base",
         "mail",
         "account",
+        "analytic",  # Required by sov.py for account_analytic_line_action
+        "contacts",  # Required by partner.py for menu_contacts
         "documents",
+        "documents_project",  # Required by task.xml for view_task_form2_document_inherit
         "sale",
         "sale_project",
         "web",
