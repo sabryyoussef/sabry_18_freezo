@@ -32,8 +32,10 @@ class MailThread(models.AbstractModel):
         """Custom prepare reply to email by company configuration"""
         company = kwargs.get('company') or self.env.company
         if not getattr(company, "add_sender_reply_to", False):
+            # Remove 'company' from kwargs before passing to parent to avoid compatibility issues
+            parent_kwargs = {k: v for k, v in kwargs.items() if k != 'company'}
             return super()._notify_get_reply_to_formatted_email(
-                record_email, record_name, **kwargs
+                record_email, record_name, **parent_kwargs
             )
         company_name = [self.env.user.name, company.name]
         if getattr(company, "email_joint", False):
