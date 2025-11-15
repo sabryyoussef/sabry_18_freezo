@@ -282,6 +282,7 @@
                         class="btn-secondary" />
                 </header>
                 <sheet>
+                    <!-- COMMENTED OUT: Calendar functionality disabled, action_schedule_meeting not available
                     <div class="oe_button_box" name="button_box">
                         <button name="action_schedule_meeting" type="object"
                             class="oe_stat_button" icon="fa-calendar"
@@ -289,6 +290,7 @@
                             string="Meetings">
                         </button>
                     </div>
+                    -->
                     <div class="oe_title">
                         <h1>
                             <field name="number" readonly="1" />
