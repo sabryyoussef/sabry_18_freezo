@@ -6,6 +6,7 @@ import { useService } from "@web/core/utils/hooks";
 
 export class ErrorReportSystray extends Component {
     static template = "error_reporter_enterprise.ErrorReportSystray";
+    static props = {};
 
     setup() {
         this.action = useService("action");
