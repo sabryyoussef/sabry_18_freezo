@@ -58,7 +58,7 @@ PSD2: SCA Ready
     },
     "images": ["static/description/Banner.png"],
     "application": True,
-    "installable": False,
+    "installable": True,
     "auto_install": False,
     "price": 89.0,
     "currency": "USD",

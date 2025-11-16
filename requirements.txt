@@ -28,6 +28,10 @@ getmac>=0.9.0
 xlsxwriter>=3.0.0
 openpyxl>=3.0.0
 
+# === Payment Processing ===
+# Required by: payment_stripe_checkout
+stripe>=5.0.0
+
 # === Additional Dependencies ===
 # Image processing (if needed by attendance photo modules)
 Pillow>=9.0.0
