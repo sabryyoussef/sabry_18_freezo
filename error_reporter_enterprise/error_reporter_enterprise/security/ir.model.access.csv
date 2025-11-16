@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_qa_error_event_user,Access QA Error Event User,model_qa_error_event,automatic_error_reporter.group_error_reporter_user,1,0,1,0
+access_qa_error_event_admin,Access QA Error Event Admin,model_qa_error_event,automatic_error_reporter.group_error_reporter_admin,1,1,1,1
+access_qa_log_handler_manager_admin,Access QA Log Handler Manager Admin,model_qa_log_handler_manager,automatic_error_reporter.group_error_reporter_admin,1,1,1,1
+access_github_config_admin,Access GitHub Config Admin,model_github_config,automatic_error_reporter.group_error_reporter_admin,1,1,1,1

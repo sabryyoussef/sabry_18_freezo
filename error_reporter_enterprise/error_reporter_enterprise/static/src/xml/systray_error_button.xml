@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="automatic_error_reporter.ErrorReportSystray" owl="1">
+        <button class="btn btn-sm btn-danger rounded-pill px-3" 
+                t-on-click="onClick"
+                title="Error Reporter - View and manage error reports">
+            <i class="fa fa-bug me-1"/> Error Reporter
+        </button>
+    </t>
+</templates>

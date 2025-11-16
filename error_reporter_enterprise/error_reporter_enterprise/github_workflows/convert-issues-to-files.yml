@@ -1,0 +1,201 @@
+name: Convert Issues to Files
+
+on:
+  issues:
+    types: [opened, edited]
+  workflow_dispatch:  # Allow manual trigger
+  schedule:
+    - cron: '0 */6 * * *'  # Run every 6 hours
+
+jobs:
+  convert-issues-to-files:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        npm install @octokit/rest
+        
+    - name: Convert Issues to Files
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          
+          // Get all issues with 'auto-export' label
+          const { data: issues } = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: 'auto-export',
+            state: 'all',
+            per_page: 100
+          });
+          
+          console.log(`Found ${issues.length} auto-export issues`);
+          
+          // Group issues by date
+          const issuesByDate = {};
+          
+          for (const issue of issues) {
+            const createdDate = new Date(issue.created_at);
+            const dateKey = createdDate.toISOString().split('T')[0]; // YYYY-MM-DD
+            
+            if (!issuesByDate[dateKey]) {
+              issuesByDate[dateKey] = [];
+            }
+            
+            issuesByDate[dateKey].push(issue);
+          }
+          
+          // Create errors directory if it doesn't exist
+          const errorsDir = 'errors';
+          if (!fs.existsSync(errorsDir)) {
+            fs.mkdirSync(errorsDir, { recursive: true });
+          }
+          
+          // Process each date
+          for (const [date, dateIssues] of Object.entries(issuesByDate)) {
+            const dateDir = path.join(errorsDir, date);
+            
+            // Create date directory
+            if (!fs.existsSync(dateDir)) {
+              fs.mkdirSync(dateDir, { recursive: true });
+            }
+            
+            // Create individual error files
+            for (const issue of dateIssues) {
+              // Extract error details from issue body
+              const errorId = issue.title.match(/\[(\w+)\]/)?.[1] || 'UNKNOWN';
+              const severity = issue.labels.find(l => l.name.startsWith('severity:'))?.name.replace('severity:', '') || 'unknown';
+              const source = issue.labels.find(l => l.name.startsWith('source:'))?.name.replace('source:', '') || 'unknown';
+              
+              // Create safe filename
+              const titlePart = issue.title.replace(/[\[\]]/g, '').replace(/[^a-zA-Z0-9\s\-_]/g, '').substring(0, 50);
+              const safeTitle = titlePart.replace(/\s+/g, '_').toLowerCase();
+              const filename = `issue_${issue.number}_${severity}_${safeTitle}.md`;
+              
+              // Create file content
+              const fileContent = `# Error Report - Issue #${issue.number}
+              
+## GitHub Issue Information
+- **Issue Number**: #${issue.number}
+- **Created**: ${issue.created_at}
+- **Updated**: ${issue.updated_at}
+- **State**: ${issue.state}
+- **Labels**: ${issue.labels.map(l => l.name).join(', ')}
+- **URL**: ${issue.html_url}
+
+## Error Details
+
+${issue.body}
+
+---
+*Converted from GitHub Issue #${issue.number} on ${new Date().toISOString()}*
+*Original Issue: ${issue.html_url}*
+`;
+              
+              // Write file
+              const filePath = path.join(dateDir, filename);
+              fs.writeFileSync(filePath, fileContent);
+              console.log(`Created: ${filePath}`);
+            }
+            
+            // Create README for this date
+            const readmeContent = `# Error Reports - ${date}
+
+Generated: ${new Date().toISOString()}
+Total Issues: ${dateIssues.length}
+
+## Issues Summary
+
+| Issue # | Severity | Title | State |
+|---------|----------|-------|-------|
+${dateIssues.map(issue => {
+  const severity = issue.labels.find(l => l.name.startsWith('severity:'))?.name.replace('severity:', '') || 'unknown';
+  return `| [#${issue.number}](${issue.html_url}) | ${severity} | ${issue.title.substring(0, 50)}... | ${issue.state} |`;
+}).join('\n')}
+
+## Files in this Directory
+
+${dateIssues.map(issue => {
+  const severity = issue.labels.find(l => l.name.startsWith('severity:'))?.name.replace('severity:', '') || 'unknown';
+  const titlePart = issue.title.replace(/[\[\]]/g, '').replace(/[^a-zA-Z0-9\s\-_]/g, '').substring(0, 50);
+  const safeTitle = titlePart.replace(/\s+/g, '_').toLowerCase();
+  const filename = `issue_${issue.number}_${severity}_${safeTitle}.md`;
+  return `- [${filename}](${filename}) - Issue #${issue.number}`;
+}).join('\n')}
+
+---
+*Auto-generated from GitHub Issues on ${new Date().toISOString()}*
+`;
+            
+            const readmePath = path.join(dateDir, 'README.md');
+            fs.writeFileSync(readmePath, readmeContent);
+            console.log(`Created: ${readmePath}`);
+          }
+          
+          // Create main index file
+          const indexContent = `# Error Reports Index
+
+Last Updated: ${new Date().toISOString()}
+Total Dates: ${Object.keys(issuesByDate).length}
+Total Issues: ${issues.length}
+
+## Reports by Date
+
+${Object.entries(issuesByDate)
+  .sort(([a], [b]) => b.localeCompare(a)) // Sort dates descending
+  .map(([date, dateIssues]) => `- [${date}](${date}/) - ${dateIssues.length} issues`)
+  .join('\n')}
+
+## Quick Stats
+
+${Object.entries(issuesByDate)
+  .sort(([a], [b]) => b.localeCompare(a))
+  .map(([date, dateIssues]) => {
+    const severityCounts = {};
+    dateIssues.forEach(issue => {
+      const severity = issue.labels.find(l => l.name.startsWith('severity:'))?.name.replace('severity:', '') || 'unknown';
+      severityCounts[severity] = (severityCounts[severity] || 0) + 1;
+    });
+    
+    const severityStr = Object.entries(severityCounts)
+      .map(([sev, count]) => `${sev}: ${count}`)
+      .join(', ');
+      
+    return `### ${date}\n- **Total**: ${dateIssues.length} issues\n- **By Severity**: ${severityStr}\n`;
+  }).join('\n')}
+
+---
+*Auto-generated from GitHub Issues*
+*Repository: ${context.repo.owner}/${context.repo.repo}*
+`;
+          
+          const indexPath = path.join(errorsDir, 'index.md');
+          fs.writeFileSync(indexPath, indexContent);
+          console.log(`Created: ${indexPath}`);
+          
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add errors/
+        
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Auto-convert GitHub issues to organized files - $(date '+%Y-%m-%d %H:%M:%S')"
+          git push
+          echo "Files committed and pushed successfully"
+        fi

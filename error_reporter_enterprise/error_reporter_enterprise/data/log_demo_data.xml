@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Log Handler Demo Data -->
+        <record id="demo_log_error_database" model="qa.error.event">
+            <field name="source">server</field>
+            <field name="scenario">odoo_log</field>
+            <field name="severity">error</field>
+            <field name="message">Database connection lost during transaction</field>
+            <field name="details">psycopg2.OperationalError: connection to server was lost
+Traceback (most recent call last):
+  File "/opt/odoo/odoo/sql_db.py", line 237, in execute
+    res = self._obj.execute(query, params)
+psycopg2.OperationalError: connection to server was lost</field>
+            <field name="project">odoo_server</field>
+            <field name="user_login">admin</field>
+            <field name="log_level">ERROR</field>
+            <field name="log_file_path">/var/log/odoo/odoo.log</field>
+            <field name="log_line_number">1543</field>
+            <field name="tags">database,connection</field>
+        </record>
+
+        <record id="demo_log_warning_memory" model="qa.error.event">
+            <field name="source">server</field>
+            <field name="scenario">odoo_log</field>
+            <field name="severity">warning</field>
+            <field name="message">High memory usage detected: 85% of available memory consumed</field>
+            <field name="details">Logger: odoo.service.server
+Module: server
+Function: memory_monitor
+Line: 89
+Time: 2024-01-15 14:30:22
+Memory Usage: 6.8GB / 8GB (85%)</field>
+            <field name="project">odoo_server</field>
+            <field name="user_login">system</field>
+            <field name="log_level">WARNING</field>
+            <field name="log_file_path">/var/log/odoo/odoo.log</field>
+            <field name="log_line_number">1789</field>
+            <field name="tags">performance,memory</field>
+        </record>
+
+        <record id="demo_log_critical_startup" model="qa.error.event">
+            <field name="source">server</field>
+            <field name="scenario">odoo_log</field>
+            <field name="severity">critical</field>
+            <field name="message">Failed to start Odoo server: Port 8069 already in use</field>
+            <field name="details">Logger: odoo.service.server
+Module: server
+Function: start_server
+Line: 156
+Time: 2024-01-15 09:15:33
+OSError: [Errno 98] Address already in use: ('0.0.0.0', 8069)</field>
+            <field name="project">odoo_server</field>
+            <field name="user_login">odoo</field>
+            <field name="log_level">CRITICAL</field>
+            <field name="log_file_path">/var/log/odoo/odoo.log</field>
+            <field name="log_line_number">892</field>
+            <field name="tags">startup,port,critical</field>
+        </record>
+
+        <record id="demo_log_error_module_load" model="qa.error.event">
+            <field name="source">server</field>
+            <field name="scenario">odoo_log</field>
+            <field name="severity">error</field>
+            <field name="message">Failed to load addon 'custom_module': ImportError</field>
+            <field name="details">Logger: odoo.modules.loading
+Module: loading
+Function: load_module
+Line: 234
+Time: 2024-01-15 10:45:17
+ImportError: No module named 'custom_dependency'
+  File "/opt/odoo/custom_addons/custom_module/__init__.py", line 3, in &lt;module&gt;
+    from custom_dependency import helper</field>
+            <field name="project">custom_module</field>
+            <field name="user_login">admin</field>
+            <field name="log_level">ERROR</field>
+            <field name="log_file_path">/var/log/odoo/odoo.log</field>
+            <field name="log_line_number">1234</field>
+            <field name="tags">module,import,dependency</field>
+        </record>
+
+        <record id="demo_log_warning_deprecated" model="qa.error.event">
+            <field name="source">server</field>
+            <field name="scenario">odoo_log</field>
+            <field name="severity">warning</field>
+            <field name="message">Deprecated API usage: Using old-style constraint definition</field>
+            <field name="details">Logger: odoo.models
+Module: models
+Function: _add_sql_constraints
+Line: 1567
+Time: 2024-01-15 11:20:45
+DeprecationWarning: _sql_constraints format is deprecated, use @api.constrains instead</field>
+            <field name="project">legacy_module</field>
+            <field name="user_login">developer</field>
+            <field name="log_level">WARNING</field>
+            <field name="log_file_path">/var/log/odoo/odoo.log</field>
+            <field name="log_line_number">2011</field>
+            <field name="tags">deprecated,api,constraint</field>
+        </record>
+
+        <!-- Odoo.sh specific examples -->
+        <record id="demo_log_error_odoo_sh" model="qa.error.event">
+            <field name="source">server</field>
+            <field name="scenario">odoo_log</field>
+            <field name="severity">error</field>
+            <field name="message">Odoo.sh: Database backup failed - insufficient storage</field>
+            <field name="details">Logger: odoo.sh.backup
+Module: backup
+Function: create_backup
+Line: 78
+Time: 2024-01-15 02:30:15
+OSError: [Errno 28] No space left on device</field>
+            <field name="project">odoo_sh_backup</field>
+            <field name="user_login">system</field>
+            <field name="log_level">ERROR</field>
+            <field name="log_file_url">https://www.odoo.sh/my/projects/12345/logs</field>
+            <field name="log_line_number">5632</field>
+            <field name="tags">odoo.sh,backup,storage</field>
+        </record>
+
+    </data>
+</odoo>

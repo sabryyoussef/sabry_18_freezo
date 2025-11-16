@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <!-- Main application menu with default action -->
+        <menuitem id="menu_error_reporter_root" 
+                  name="Automatic Error Reporter" 
+                  action="action_qa_error_event"
+                  sequence="90"
+                  web_icon="automatic_error_reporter,static/description/icon.svg"/>
+        
+        <!-- Sub-menus under the main application -->
+        <menuitem id="menu_qa_error_report_new" 
+                  name="➕ Report New Error" 
+                  parent="menu_error_reporter_root" 
+                  action="action_qa_error_event_new" 
+                  sequence="5"/>
+        
+        <menuitem id="menu_qa_error_event" 
+                  name="All Error Events" 
+                  parent="menu_error_reporter_root" 
+                  action="action_qa_error_event" 
+                  sequence="10"/>
+                  
+        <menuitem id="menu_qa_error_my_reports" 
+                  name="My Reports" 
+                  parent="menu_error_reporter_root" 
+                  action="action_qa_error_event_my_reports" 
+                  sequence="15"/>
+                  
+        <menuitem id="menu_qa_error_new" 
+                  name="New Errors" 
+                  parent="menu_error_reporter_root" 
+                  action="action_qa_error_event_new_errors" 
+                  sequence="20"/>
+                  
+        <menuitem id="menu_qa_error_in_progress" 
+                  name="In Progress" 
+                  parent="menu_error_reporter_root" 
+                  action="action_qa_error_event_in_progress" 
+                  sequence="25"/>
+                  
+        <menuitem id="menu_qa_error_fixed" 
+                  name="Fixed Errors" 
+                  parent="menu_error_reporter_root" 
+                  action="action_qa_error_event_fixed" 
+                  sequence="30"/>
+                  
+        <menuitem id="menu_qa_error_analytics" 
+                  name="📊 Analytics" 
+                  parent="menu_error_reporter_root" 
+                  action="action_qa_error_event_graph" 
+                  sequence="40"/>
+                  
+        <menuitem id="menu_github_export" 
+                  name="📤 Export to GitHub Issues" 
+                  parent="menu_error_reporter_root" 
+                  action="action_export_errors_to_github" 
+                  sequence="50"
+                  groups="automatic_error_reporter.group_error_reporter_admin"/>
+                  
+        <menuitem id="menu_github_files_export" 
+                  name="📁 Export to GitHub Files" 
+                  parent="menu_error_reporter_root" 
+                  action="action_export_errors_to_github_files" 
+                  sequence="55"
+                  groups="automatic_error_reporter.group_error_reporter_admin"/>
+                  
+        <menuitem id="menu_github_config" 
+                  name="⚙️ GitHub Settings" 
+                  parent="menu_error_reporter_root" 
+                  action="action_github_config" 
+                  sequence="60"
+                  groups="automatic_error_reporter.group_error_reporter_admin"/>
+
+        <!-- Also add to Settings for easy access -->
+        <menuitem id="menu_qa_error_event_settings" 
+                  name="Error Events" 
+                  parent="base.menu_administration" 
+                  action="action_qa_error_event" 
+                  sequence="50"
+                  groups="base.group_system"/>
+    </data>
+</odoo>
