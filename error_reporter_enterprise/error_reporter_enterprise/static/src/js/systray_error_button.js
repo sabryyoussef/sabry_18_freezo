@@ -5,18 +5,18 @@ import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 
 export class ErrorReportSystray extends Component {
-    static template = "automatic_error_reporter.ErrorReportSystray";
+    static template = "error_reporter_enterprise.ErrorReportSystray";
 
     setup() {
         this.action = useService("action");
     }
 
     async onClick() {
-        this.action.doAction('automatic_error_reporter.action_qa_error_event');
+        this.action.doAction('error_reporter_enterprise.action_qa_error_event');
     }
 }
 
-registry.category("systray").add("automatic_error_reporter.ErrorReportSystray", {
+registry.category("systray").add("error_reporter_enterprise.ErrorReportSystray", {
     Component: ErrorReportSystray,
     isDisplayed: () => true,
 });
