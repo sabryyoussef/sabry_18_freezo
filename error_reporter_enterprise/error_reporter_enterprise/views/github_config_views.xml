@@ -73,13 +73,5 @@
             <field name="view_id" ref="view_github_config_form"/>
         </record>
 
-        <!-- Add to Error Reporter menu -->
-        <menuitem id="menu_github_config" 
-                  name="⚙️ GitHub Settings" 
-                  parent="menu_error_reporter_root" 
-                  action="action_github_config" 
-                  sequence="60"
-                  groups="error_reporter_enterprise.group_error_reporter_admin"/>
-
     </data>
 </odoo>
