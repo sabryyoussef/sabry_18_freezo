@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "HR Employee Custom",
-    'author': "Beshoy Wageh",
+    'author': "BeshoyWageh - Level 0",
     'depends': ['base','hr','hr_holidays','hr_payroll'],
     'data': [
         'security/security.xml',

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Sale Approval",
-    'author': "BeshoyWageh",
+    'author': "BeshoyWageh - Level 3",
     'version': '0.1',
     'depends': ['base','sale','approvals','project','freezoner_custom'],
     'data': [

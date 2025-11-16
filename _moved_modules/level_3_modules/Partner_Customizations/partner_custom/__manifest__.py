@@ -1,6 +1,6 @@
 {
     "name": "Partner Custom",
-    "author": "Beshoy Wageh",
+    "author": "BeshoyWageh - Level 3",
     "depends": ["base", "product", "documents"],
     "data": [
         "security/ir.model.access.csv",

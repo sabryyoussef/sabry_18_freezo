@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Partner Passowrd",
-    'author': "BeshoyWageh",
+    'author': "BeshoyWageh - Level 0",
     'version': '0.1',
     'depends': ['base','sale','approvals','project'],
     'data': [

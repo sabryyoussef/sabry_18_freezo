@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Cabinet Directory",
-    'author': "Beshoy Wageh",
+    'author': "BeshoyWageh - Level 3",
     # 'version': '16.0',
     'depends': ['base', 'crm', 'documents', 'hr'],
     'data': [

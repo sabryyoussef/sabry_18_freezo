@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Hr Expense Custom",
-    'author': "Beshoy Wageh",
+    'author': "BeshoyWageh - Level 0",
     'category': 'HR',
     'version': '1.0',
     'depends': ['base', 'hr_expense'],

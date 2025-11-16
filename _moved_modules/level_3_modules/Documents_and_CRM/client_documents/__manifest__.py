@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Client Documents",
-    "author": "Beshoy Wageh",
+    "author": "BeshoyWageh - Level 3",
     "category": "Productivity/Documents",
     "version": "18.0.1.0.0",
     # any module necessary for this one to work correctly

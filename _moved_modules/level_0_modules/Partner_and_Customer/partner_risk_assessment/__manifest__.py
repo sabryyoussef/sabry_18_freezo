@@ -1,6 +1,6 @@
 {
     'name': 'Risk Assessment',
-    'author': 'Beshoy Wageh',
+    'author': 'BeshoyWageh - Level 0',
     'depends': ['base','crm'],
     'data': [
         'security/ir.model.access.csv',

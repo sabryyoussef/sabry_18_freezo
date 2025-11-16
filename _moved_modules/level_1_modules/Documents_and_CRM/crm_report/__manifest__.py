@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Crm Reports",
-    'author': "Beshoy Wageh",
+    'author': "BeshoyWageh - Level 1",
     'depends': ['base','crm','report_xlsx'],
     'data': [
         'security/ir.model.access.csv',

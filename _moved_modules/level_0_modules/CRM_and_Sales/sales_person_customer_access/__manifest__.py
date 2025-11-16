@@ -1,6 +1,6 @@
 {
     'name': "Salesperson Own Customers",
-    'author': "Beshoy Wageh",
+    'author': "BeshoyWageh - Level 0",
     'category': 'Sales',
     'depends': ['sale_management'],
     'data': [

@@ -1,6 +1,6 @@
 {
     'name': "account_invoice_report",
-    'author': "Beshoy Wageh",
+    'author': "BeshoyWageh - Level 0",
     'depends': ['base', 'account','l10n_ae','sale','account_reports'],
     'data': [
         'views/views.xml',

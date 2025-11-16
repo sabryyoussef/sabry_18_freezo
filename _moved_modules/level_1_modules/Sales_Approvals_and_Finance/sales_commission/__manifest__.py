@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Sales Commission",
-    "author": "Beshoy Wageh",
+    "author": "BeshoyWageh - Level 1",
     "category": "Sales/Commissions",
     "version": "0.1",
     "depends": [

@@ -1,7 +1,7 @@
 {
     'name': 'Product Restriction',
     # 'version': '16.0.0.0',
-    "author": "Beshoy Wageh",
+    "author": "BeshoyWageh - Level 0",
     'depends': ['base','sale_management'],
     'data': [
             'security/security.xml',

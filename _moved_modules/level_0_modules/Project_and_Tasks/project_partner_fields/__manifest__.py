@@ -1,6 +1,6 @@
 {
     'name': "Project Partner Custom",
-    'author': "BeshoyWageh",
+    'author': "BeshoyWageh - Level 0",
     # 'version': '16.0',
     'depends': ['base'],
     'data': [

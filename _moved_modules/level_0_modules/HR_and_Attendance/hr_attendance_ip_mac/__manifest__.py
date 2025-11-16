@@ -2,7 +2,7 @@
 {
     'name': 'HR Attendance IP MAC Adress',
     # 'version': '16.0.1.0.1',
-    'author': 'Beshoy Wageh',
+    'author': 'BeshoyWageh - Level 0',
     'category': 'Human Resources',
     'depends': ['base', 'hr', 'hr_attendance'],
     'data': [

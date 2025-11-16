@@ -1,6 +1,6 @@
 {
     'name': "Partner First Name",
-    'author': "Beshoy Wageh",
+    'author': "BeshoyWageh - Level 3",
     'version': '0.1',
     'depends': ['base','sale','account'],
     'data': [

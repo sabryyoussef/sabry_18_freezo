@@ -1,6 +1,6 @@
 {
     'name': "F360 Commission",
-    'author': "BeshoyWageh",
+    'author': "BeshoyWageh - Quarantined",
     # 'version': '16.0',
     'depends': ['base', 'stock','sale'],
     'data': [

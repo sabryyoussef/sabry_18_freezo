@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Crm Log",
-    'author': "BeshoyWageh",
+    'author': "BeshoyWageh - Level 3",
     'version': '0.1',
     'depends': ['base', 'crm', 'sale', 'sales_team'],
     'data': [

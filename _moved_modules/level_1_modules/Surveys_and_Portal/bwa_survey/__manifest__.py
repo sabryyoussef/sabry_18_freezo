@@ -1,6 +1,6 @@
 {
     'name': "Portal Survey Ratingss",
-    'author': 'Beshoy Wageh',
+    'author': 'BeshoyWageh - Level 1',
     'depends': ['base', 'portal', 'website','project','freezoner_custom'],
     'data': [
         'security/ir.model.access.csv',

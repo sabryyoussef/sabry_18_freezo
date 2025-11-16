@@ -1,7 +1,7 @@
 {
     "name": "freezoner_custom",
     "version": "18.0.1.0.0",
-    "author": "BeshoyWageh, Sabry Youssef",
+    "author": "BeshoyWageh - Level 3, Sabry Youssef",
     "category": "Custom",
     "summary": "Customizations for Freezoner",
     "description": "Module for Freezoner-specific customizations.",
