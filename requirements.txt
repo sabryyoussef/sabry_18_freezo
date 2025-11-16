@@ -1,0 +1,49 @@
+# Freezoner 17 Enterprise - Python Dependencies
+# These libraries are required for custom modules to function properly
+# Odoo.sh will automatically install these when you push to the repository
+
+# === Geolocation and Location Tracking ===
+# Required by: hr_attendance_location, hr_attendance_geofence, hr_attendance_photo_geolocation
+geopy>=2.3.0
+geoip2>=4.6.0
+
+# === Phone Number Validation ===
+# Required by: crm_log, partner_custom, and other CRM modules
+phonenumbers>=8.13.0
+
+# === PDF Processing ===
+# Required by: report generation modules, document management
+PyPDF2>=3.0.0
+
+# === Text Processing ===
+# Required by: email processing, document conversion
+html2text>=2020.1.16
+
+# === Network/MAC Address ===
+# Required by: hr_attendance_ip_mac
+getmac>=0.9.0
+
+# === Excel Report Generation ===
+# Required by: report_xlsx and various reporting modules
+xlsxwriter>=3.0.0
+openpyxl>=3.0.0
+
+# === Additional Dependencies ===
+# Image processing (if needed by attendance photo modules)
+Pillow>=9.0.0
+
+# Date/time utilities
+python-dateutil>=2.8.0
+
+# HTTP requests (for external integrations)
+requests>=2.28.0
+
+# QR Code generation (if needed)
+qrcode>=7.3.0
+
+# === Notes ===
+# - All versions use >= to allow compatible updates
+# - Odoo.sh will install these automatically on build
+# - Local installations: pip3 install -r requirements.txt
+# - Some modules may work without all dependencies
+# - Critical dependencies: geopy, geoip2, phonenumbers
