@@ -183,6 +183,9 @@ class MailMessage(models.Model):
         else:
             company = user.company_id
         user_name = user.name
+        # If email_from is False or empty, use user's email or a default
+        if not email_from:
+            email_from = user.email or f"{user.login}@{company.email or 'example.com'}"
         return tools.formataddr(
             (f"{user_name} {'|'} {company.name}", email_from)
         )

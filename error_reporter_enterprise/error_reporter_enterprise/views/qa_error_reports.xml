@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Error Report Action -->
+        <record id="action_report_all_errors" model="ir.actions.report">
+            <field name="name">All Errors Report</field>
+            <field name="model">qa.error.event</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">error_reporter_enterprise.report_all_errors_template</field>
+            <field name="report_file">error_reporter_enterprise.report_all_errors_template</field>
+            <field name="print_report_name">All_Errors_Report</field>
+        </record>
+
+        <!-- Report Template -->
+        <template id="report_all_errors_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Header -->
+                        <div class="row mb-4">
+                            <div class="col-12 text-center">
+                                <h2><strong>Error Reporter - All Errors Summary</strong></h2>
+                                <p><strong>Generated:</strong> <span t-esc="datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')"/></p>
+                                <hr/>
+                            </div>
+                        </div>
+
+                        <!-- Simple Summary -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h4>Total Errors: <span t-esc="len(docs)"/></h4>
+                            </div>
+                        </div>
+
+                        <!-- Errors Table -->
+                        <table class="table table-striped" style="font-size: 12px;">
+                            <thead style="background-color: #f8f9fa;">
+                                <tr>
+                                    <th style="width: 15%;">Date</th>
+                                    <th style="width: 10%;">Severity</th>
+                                    <th style="width: 15%;">Source</th>
+                                    <th style="width: 15%;">Project</th>
+                                    <th style="width: 35%;">Message</th>
+                                    <th style="width: 10%;">User</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="docs" t-as="error">
+                                    <td t-esc="error.create_date and error.create_date.strftime('%m/%d %H:%M') or 'N/A'"/>
+                                    <td t-esc="error.severity or 'N/A'"/>
+                                    <td t-esc="error.source or 'N/A'"/>
+                                    <td t-esc="error.project or 'N/A'"/>
+                                    <td t-esc="error.message and (error.message[:60] + '...' if len(error.message) > 60 else error.message) or 'N/A'"/>
+                                    <td t-esc="error.user_login or 'N/A'"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <!-- Reports Menu -->
+        <menuitem id="menu_error_reports"
+                  name="Reports"
+                  parent="menu_error_reporter_root"
+                  sequence="80"/>
+
+        <menuitem id="menu_all_errors_report"
+                  name="All Errors Report"
+                  parent="menu_error_reports"
+                  action="action_report_all_errors"
+                  sequence="10"/>
+                  
+        <!-- Server Action to Generate Report with All Data -->
+        <record id="action_generate_all_errors_report" model="ir.actions.server">
+            <field name="name">Generate All Errors Report</field>
+            <field name="model_id" ref="model_qa_error_event"/>
+            <field name="binding_model_id" ref="model_qa_error_event"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+# Get all error records
+all_errors = env['qa.error.event'].search([])
+if all_errors:
+    # Generate report for all errors
+    action = env.ref('error_reporter_enterprise.action_report_all_errors').report_action(all_errors)
+else:
+    # Show message if no errors found
+    raise UserError("No error records found in the database. Please check if demo data is loaded.")
+            </field>
+        </record>
+
+        <!-- Alternative menu that uses server action -->
+        <menuitem id="menu_generate_all_errors_report"
+                  name="Generate All Errors Report"
+                  parent="menu_error_reports"
+                  action="action_generate_all_errors_report"
+                  sequence="20"/>
+
+    </data>
+</odoo>

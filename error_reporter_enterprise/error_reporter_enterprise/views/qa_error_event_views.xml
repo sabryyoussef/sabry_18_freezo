@@ -1,0 +1,425 @@
+<odoo>
+    <data>
+        <record id="view_qa_error_event_tree" model="ir.ui.view">
+            <field name="name">qa.error.event.tree</field>
+            <field name="model">qa.error.event</field>
+            <field name="arch" type="xml">
+                <list default_order="date desc" multi_edit="1">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="status" widget="badge" 
+                           decoration-success="status=='fixed'" 
+                           decoration-warning="status=='in_progress'"
+                           decoration-info="status=='new'"
+                           decoration-muted="status in ['wont_fix', 'duplicate']"/>
+                    <field name="impact" widget="badge" 
+                           decoration-danger="impact=='critical'" 
+                           decoration-warning="impact=='high'"
+                           decoration-success="impact=='medium'"
+                           decoration-muted="impact=='low'"/>
+                    <field name="priority" widget="priority"/>
+                    <field name="source"/>
+                    <field name="severity" widget="badge" 
+                           decoration-danger="severity=='critical'" 
+                           decoration-warning="severity=='warning'" 
+                           decoration-info="severity=='info'"/>
+                    <field name="reporter_id" optional="show"/>
+                    <field name="assigned_to" optional="show"/>
+                    <field name="error_location" optional="show"/>
+                    <field name="project" optional="hide"/>
+                    <field name="scenario" optional="hide"/>
+                    <field name="user_login" optional="hide"/>
+                    <field name="occurrences" string="Count" optional="show"/>
+                    <field name="fingerprint" optional="hide"/>
+                    <field name="log_level" optional="hide"/>
+                    <field name="log_file_path" optional="hide"/>
+                    <field name="url" optional="hide"/>
+                    <field name="browser" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_qa_error_event_form" model="ir.ui.view">
+            <field name="name">qa.error.event.form</field>
+            <field name="model">qa.error.event</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <!-- Status bar -->
+                        <field name="status" widget="statusbar" 
+                               statusbar_visible="new,in_progress,fixed"/>
+                        
+                        <!-- Workflow buttons -->
+                        <button name="action_mark_in_progress" type="object" 
+                                string="Mark In Progress" 
+                                class="btn-warning"
+                                invisible="status != 'new'"/>
+                        <button name="action_assign_to_me" type="object" 
+                                string="Assign to Me" 
+                                class="btn-info"
+                                invisible="assigned_to"/>
+                        <button name="action_mark_fixed" type="object" 
+                                string="Mark Fixed" 
+                                class="btn-success"
+                                invisible="status in ['fixed', 'wont_fix']"/>
+                        <button name="action_mark_duplicate" type="object" 
+                                string="Mark Duplicate" 
+                                class="btn-secondary"
+                                invisible="status in ['fixed', 'duplicate', 'wont_fix']"/>
+                        <button name="action_mark_wont_fix" type="object" 
+                                string="Won't Fix" 
+                                class="btn-secondary"
+                                invisible="status in ['fixed', 'duplicate', 'wont_fix']"/>
+                        
+                        <!-- Legacy action buttons -->
+                        <button name="action_open_trace" type="object" 
+                                string="Open Trace" 
+                                class="btn-primary" 
+                                invisible="not trace_url"/>
+                        <button name="action_open_url" type="object" 
+                                string="Open URL" 
+                                class="btn-secondary" 
+                                invisible="not url"/>
+                    </header>
+                    
+                    <sheet>
+                        <!-- Status ribbons -->
+                        <div class="ribbon ribbon-top-right" invisible="status != 'fixed'">
+                            <span class="text-bg-success">Fixed</span>
+                        </div>
+                        <div class="ribbon ribbon-top-right" invisible="status != 'wont_fix'">
+                            <span class="text-bg-secondary">Won't Fix</span>
+                        </div>
+                        <div class="ribbon ribbon-top-right" invisible="status != 'duplicate'">
+                            <span class="text-bg-warning">Duplicate</span>
+                        </div>
+                        
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1" placeholder="Error title will be generated automatically..."/>
+                            </h1>
+                        </div>
+                        
+                        <group>
+                            <group name="basic_info" string="Basic Information">
+                                <field name="source"/>
+                                <field name="impact" widget="badge" 
+                                       decoration-danger="impact=='critical'" 
+                                       decoration-warning="impact=='high'"
+                                       decoration-success="impact=='medium'"
+                                       decoration-muted="impact=='low'"/>
+                                <field name="priority"/>
+                                <field name="reporter_id" invisible="source != 'manual'"/>
+                                <field name="report_date" invisible="source != 'manual'"/>
+                                <field name="assigned_to"/>
+                            </group>
+                            <group name="status_info" string="Status Information">
+                                <field name="severity"/>
+                                <field name="date" readonly="1"/>
+                                <field name="occurrences" readonly="1"/>
+                                <field name="fixed_date" readonly="1" invisible="not fixed_date"/>
+                                <field name="fingerprint" readonly="1" groups="base.group_no_one"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <!-- Tab 1: Error Information -->
+                            <page string="Error Information" name="error_info">
+                                <group>
+                                    <group name="manual_report_fields" string="What Happened?" invisible="source != 'manual'">
+                                        <field name="error_location" placeholder="e.g., Sales > Orders, Accounting > Invoices"/>
+                                        <field name="record_reference" placeholder="e.g., Invoice INV/2023/001, Project ABC"/>
+                                    </group>
+                                    <group name="legacy_fields" string="Technical Context" invisible="source == 'manual'">
+                                        <field name="project"/>
+                                        <field name="scenario"/>
+                                        <field name="user_login"/>
+                                        <field name="browser"/>
+                                        <field name="tags"/>
+                                    </group>
+                                </group>
+                                
+                                <group name="description_group" string="Description" invisible="source != 'manual'">
+                                    <field name="description" nolabel="1" placeholder="Describe what you were trying to do when the error occurred..."/>
+                                </group>
+                                
+                                <group name="reproduce_group" string="Steps to Reproduce" invisible="source != 'manual'">
+                                    <field name="steps_to_reproduce" nolabel="1" placeholder="1. Go to...&#10;2. Click on...&#10;3. Fill in...&#10;4. Error appears..."/>
+                                </group>
+                                
+                                <group name="error_message" string="Error Message">
+                                    <field name="message" nolabel="1" widget="text" placeholder="Error message or description..."/>
+                                </group>
+                                
+                                <group name="error_details" string="Technical Details">
+                                    <field name="details" nolabel="1" widget="text" placeholder="Stack trace, technical details, logs..."/>
+                                </group>
+                            </page>
+                            
+                            <!-- Tab 2: URLs and Context -->
+                            <page string="URLs &amp; Context" name="urls_context">
+                                <group name="urls" string="URLs">
+                                    <field name="url" widget="url"/>
+                                    <field name="trace_url" widget="url"/>
+                                </group>
+                                <group name="log_info" string="Log File Information">
+                                    <field name="log_level"/>
+                                    <field name="log_file_path"/>
+                                    <field name="log_file_url" widget="url"/>
+                                    <field name="log_line_number"/>
+                                </group>
+                            </page>
+                            
+                            <!-- Tab 3: Screenshots & Attachments -->
+                            <page string="Screenshots" name="screenshots">
+                                <field name="screenshot_ids" widget="many2many_binary" string="Screenshots and Files"/>
+                            </page>
+                            
+                            <!-- Tab 4: Fix Details -->
+                            <page string="Fix Details" name="fix_details" invisible="status not in ['fixed', 'wont_fix']">
+                                <group>
+                                    <field name="fix_commit" placeholder="Git commit hash"/>
+                                    <field name="fixed_date" readonly="1"/>
+                                </group>
+                                <group name="fix_notes_group" string="Fix Notes">
+                                    <field name="fix_notes" nolabel="1" placeholder="Describe the fix that was implemented..."/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    
+                    <!-- Chatter -->
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_qa_error_event_search" model="ir.ui.view">
+            <field name="name">qa.error.event.search</field>
+            <field name="model">qa.error.event</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Title/Message" filter_domain="['|', ('name', 'ilike', self), ('message', 'ilike', self)]"/>
+                    <field name="source"/>
+                    <field name="status"/>
+                    <field name="impact"/>
+                    <field name="priority"/>
+                    <field name="severity"/>
+                    <field name="project"/>
+                    <field name="scenario"/>
+                    <field name="user_login"/>
+                    <field name="reporter_id"/>
+                    <field name="assigned_to"/>
+                    <field name="error_location"/>
+                    <field name="date"/>
+                    <field name="tags"/>
+                    <field name="log_level"/>
+                    
+                    <!-- Status filters -->
+                    <filter name="filter_new" string="New Errors" domain="[('status', '=', 'new')]" help="Recently reported errors"/>
+                    <filter name="filter_in_progress" string="In Progress" domain="[('status', '=', 'in_progress')]"/>
+                    <filter name="filter_fixed" string="Fixed" domain="[('status', '=', 'fixed')]"/>
+                    <separator/>
+                    
+                    <!-- Impact filters -->
+                    <filter name="filter_critical" string="Critical" domain="[('impact', '=', 'critical')]" help="Critical issues blocking work"/>
+                    <filter name="filter_high" string="High Priority" domain="[('impact', '=', 'high')]"/>
+                    <separator/>
+                    
+                    <!-- Source filters -->
+                    <filter name="filter_manual" string="Manual Reports" domain="[('source', '=', 'manual')]" help="Manually reported errors"/>
+                    <filter name="filter_odoo_ui" string="Odoo UI" domain="[('source', '=', 'odoo_ui')]"/>
+                    <filter name="filter_odoo_server" string="Odoo Server" domain="[('source', '=', 'odoo_server')]"/>
+                    <filter name="filter_server" string="Server Logs" domain="[('source', '=', 'server')]"/>
+                    <filter name="filter_playwright" string="Playwright" domain="[('source', '=', 'playwright')]"/>
+                    <separator/>
+                    
+                    <!-- Personal filters -->
+                    <filter name="filter_my_reports" string="My Reports" domain="[('reporter_id', '=', uid)]" help="Errors I reported"/>
+                    <filter name="filter_assigned_to_me" string="Assigned to Me" domain="[('assigned_to', '=', uid)]" help="Errors assigned to me"/>
+                    <separator/>
+                    
+                    <!-- Severity filters -->
+                    <filter name="filter_severity_critical" string="Critical Severity" domain="[('severity', '=', 'critical')]"/>
+                    <filter name="filter_error" string="Error Severity" domain="[('severity', '=', 'error')]"/>
+                    <filter name="filter_warning" string="Warning Severity" domain="[('severity', '=', 'warning')]"/>
+                    <separator/>
+                    
+                    <!-- Time filters -->
+                    <filter name="filter_today" string="Today" domain="[('date', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                    <filter name="filter_week" string="This Week" domain="[('date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                    <filter name="filter_month" string="This Month" domain="[('date', '&gt;=', (context_today() - datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"/>
+                    
+                    <group expand="0" string="Group By">
+                        <filter name="group_status" string="Status" domain="[]" context="{'group_by': 'status'}"/>
+                        <filter name="group_impact" string="Impact" domain="[]" context="{'group_by': 'impact'}"/>
+                        <filter name="group_assigned_to" string="Assigned To" domain="[]" context="{'group_by': 'assigned_to'}"/>
+                        <filter name="group_severity" string="Severity" domain="[]" context="{'group_by': 'severity'}"/>
+                        <filter name="group_source" string="Source" domain="[]" context="{'group_by': 'source'}"/>
+                        <filter name="group_project" string="Project" domain="[]" context="{'group_by': 'project'}"/>
+                        <filter name="group_date" string="Date" domain="[]" context="{'group_by': 'date:day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_qa_error_event_graph" model="ir.ui.view">
+            <field name="name">qa.error.event.graph</field>
+            <field name="model">qa.error.event</field>
+            <field name="arch" type="xml">
+                <graph string="Error Statistics" type="bar" stacked="True">
+                    <field name="date" type="row" interval="day"/>
+                    <field name="severity" type="col"/>
+                    <field name="occurrences" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_qa_error_event_pivot" model="ir.ui.view">
+            <field name="name">qa.error.event.pivot</field>
+            <field name="model">qa.error.event</field>
+            <field name="arch" type="xml">
+                <pivot string="Error Analysis">
+                    <field name="source" type="row"/>
+                    <field name="severity" type="col"/>
+                    <field name="id" type="measure" widget="integer"/>
+                    <field name="occurrences" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_qa_error_event_kanban" model="ir.ui.view">
+            <field name="name">qa.error.event.kanban</field>
+            <field name="model">qa.error.event</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status" class="o_kanban_small_column" 
+                        quick_create="false" archivable="false">
+                    <field name="color"/>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="status"/>
+                    <field name="impact"/>
+                    <field name="priority"/>
+                    <field name="severity"/>
+                    <field name="source"/>
+                    <field name="date"/>
+                    <field name="message"/>
+                    <field name="project"/>
+                    <field name="occurrences"/>
+                    <field name="reporter_id"/>
+                    <field name="assigned_to"/>
+                    <field name="error_location"/>
+                    <field name="record_reference"/>
+                    <progressbar field="impact" colors='{"critical": "danger", "high": "warning", "medium": "success", "low": "muted"}'/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <t t-esc="record.name.value"/>
+                                            </strong>
+                                            <!-- Impact badge -->
+                                            <span t-if="record.impact.value" 
+                                                  t-attf-class="badge ms-1 #{record.impact.value === 'critical' ? 'text-bg-danger' : record.impact.value === 'high' ? 'text-bg-warning' : record.impact.value === 'medium' ? 'text-bg-success' : 'text-bg-secondary'}">
+                                                <t t-if="record.impact.value === 'critical'">🔴</t>
+                                                <t t-elif="record.impact.value === 'high'">🟡</t>
+                                                <t t-elif="record.impact.value === 'medium'">🟢</t>
+                                                <t t-else="">⚪</t>
+                                            </span>
+                                        </div>
+                                        <div class="o_kanban_record_body">
+                                            <div class="o_dropdown_kanban dropdown">
+                                                <a class="dropdown-toggle o-no-caret btn" type="button" 
+                                                   data-bs-toggle="dropdown" data-bs-display="static" 
+                                                   href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                                    <span class="fa fa-ellipsis-v"/>
+                                                </a>
+                                                <div class="dropdown-menu" role="menu">
+                                                    <a t-if="record.status.raw_value === 'new'" 
+                                                       type="object" name="action_mark_in_progress" 
+                                                       class="dropdown-item">Mark In Progress</a>
+                                                    <a t-if="record.status.raw_value !== 'fixed'" 
+                                                       type="object" name="action_mark_fixed" 
+                                                       class="dropdown-item">Mark Fixed</a>
+                                                    <a t-if="!record.assigned_to.raw_value" 
+                                                       type="object" name="action_assign_to_me" 
+                                                       class="dropdown-item">Assign to Me</a>
+                                                    <div class="dropdown-divider"/>
+                                                    <a type="object" name="action_mark_duplicate" 
+                                                       class="dropdown-item">Mark Duplicate</a>
+                                                    <a type="object" name="action_mark_wont_fix" 
+                                                       class="dropdown-item">Won't Fix</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Card body content -->
+                                    <div class="o_kanban_record_body">
+                                        <t t-if="record.error_location.value">
+                                            <div class="text-muted mb-1">
+                                                <i class="fa fa-map-marker-alt"/> <t t-esc="record.error_location.value"/>
+                                            </div>
+                                        </t>
+                                        <t t-if="record.record_reference.value">
+                                            <div class="text-muted small">
+                                                <i class="fa fa-link"/> <t t-esc="record.record_reference.value"/>
+                                            </div>
+                                        </t>
+                                        <t t-if="record.message.value">
+                                            <div class="text-muted small mt-1" style="max-height: 40px; overflow: hidden;">
+                                                <t t-esc="record.message.value"/>
+                                            </div>
+                                        </t>
+                                    </div>
+                                    
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left">
+                                            <span t-attf-class="badge rounded-pill #{record.source.value === 'manual' ? 'text-bg-primary' : 'text-bg-info'}">
+                                                <t t-esc="record.source.value"/>
+                                            </span>
+                                            <t t-if="record.project.value">
+                                                <span class="badge rounded-pill text-bg-secondary">
+                                                    <t t-esc="record.project.value"/>
+                                                </span>
+                                            </t>
+                                            <t t-if="record.priority.value and record.priority.value !== '1'">
+                                                <span t-attf-class="badge rounded-pill #{record.priority.value === '3' ? 'text-bg-danger' : record.priority.value === '2' ? 'text-bg-warning' : 'text-bg-secondary'}">
+                                                    Priority: <t t-esc="record.priority.value === '3' ? 'Urgent' : record.priority.value === '2' ? 'High' : 'Low'"/>
+                                                </span>
+                                            </t>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right">
+                                            <t t-if="record.assigned_to.value">
+                                                <img t-att-src="kanban_image('res.users', 'avatar_128', record.assigned_to.raw_value)" 
+                                                     t-att-title="record.assigned_to.value" 
+                                                     t-att-alt="record.assigned_to.value" 
+                                                     class="oe_kanban_avatar o_image_24_cover rounded-circle"/>
+                                            </t>
+                                            <span class="badge rounded-pill text-bg-light text-dark">
+                                                <t t-esc="record.occurrences.value"/> occurrence(s)
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Date footer -->
+                                    <div class="o_kanban_record_bottom mt-2">
+                                        <div class="text-muted small">
+                                            <i class="fa fa-clock-o"/> 
+                                            <t t-esc="record.date.value"/>
+                                            <t t-if="record.reporter_id.value and record.source.raw_value === 'manual'">
+                                                by <t t-esc="record.reporter_id.value"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+    </data>
+</odoo>

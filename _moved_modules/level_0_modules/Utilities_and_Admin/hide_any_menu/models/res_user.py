@@ -26,11 +26,11 @@ class Users(models.Model):
     # there is no need to restart the server.
     @api.model_create_multi
     def create(self, vals_list):
-        self.env["ir.ui.menu"].clear_caches()
+        self.env.registry.clear_cache()
         return super(Users, self).create(vals_list)
 
     def write(self, values):
-        self.env["ir.ui.menu"].clear_caches()
+        self.env.registry.clear_cache()
         return super(Users, self).write(values)
 
 
@@ -58,11 +58,11 @@ class ResGroups(models.Model):
     # there is no need to restart the server.
     @api.model_create_multi
     def create(self, vals_list):
-        self.env["ir.ui.menu"].clear_caches()
+        self.env.registry.clear_cache()
         return super(ResGroups, self).create(vals_list)
 
     def write(self, values):
-        self.env["ir.ui.menu"].clear_caches()
+        self.env.registry.clear_cache()
         return super(ResGroups, self).write(values)
 
 
@@ -108,11 +108,11 @@ class IrUiMenu(models.Model):
     # there is no need to restart the server.
     @api.model_create_multi
     def create(self, vals_list):
-        self.env["ir.ui.menu"].clear_caches()
+        self.env.registry.clear_cache()
         return super(IrUiMenu, self).create(vals_list)
 
     def write(self, values):
-        self.env["ir.ui.menu"].clear_caches()
+        self.env.registry.clear_cache()
         return super(IrUiMenu, self).write(values)
 
     @api.model

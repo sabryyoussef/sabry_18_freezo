@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- GitHub Configuration Form View -->
+        <record id="view_github_config_form" model="ir.ui.view">
+            <field name="name">github.config.form</field>
+            <field name="model">github.config</field>
+            <field name="arch" type="xml">
+                <form string="GitHub Configuration">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <i class="fa fa-github"/> GitHub Integration Setup
+                            </h1>
+                        </div>
+                        
+                        <group>
+                            <group string="GitHub Repository">
+                                <field name="github_repo" placeholder="e.g., john-doe/odoo-errors"/>
+                                <div class="text-muted">
+                                    <p>
+                                        <i class="fa fa-info-circle"/> Repository format: <code>username/repository-name</code><br/>
+                                        The repository must exist and be accessible with your token.
+                                    </p>
+                                </div>
+                            </group>
+                            
+                            <group string="Authentication">
+                                <field name="github_token" password="True" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"/>
+                                <div class="text-muted">
+                                    <p>
+                                        <i class="fa fa-key"/> Personal Access Token with <strong>repo</strong> permissions.<br/>
+                                        <a href="#" class="btn btn-link btn-sm" type="object" name="open_github_token_help">
+                                            <i class="fa fa-external-link"/> Generate Token on GitHub
+                                        </a>
+                                    </p>
+                                </div>
+                            </group>
+                        </group>
+                        
+                        <div class="alert alert-info" role="alert">
+                            <h4><i class="fa fa-lightbulb-o"/> How it works:</h4>
+                            <ul>
+                                <li>Only <strong>Critical</strong> and <strong>Error</strong> severity errors are exported</li>
+                                <li>Each error becomes a GitHub issue with proper labels</li>
+                                <li>Issues include full error details, context, and technical information</li>
+                                <li>Export is limited to 20 errors per run to avoid API rate limits</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="alert alert-warning" role="alert">
+                            <h4><i class="fa fa-exclamation-triangle"/> Security Note:</h4>
+                            <p>Your GitHub token is stored securely in Odoo system parameters. Only administrators can access this configuration.</p>
+                        </div>
+                    </sheet>
+                    
+                    <footer>
+                        <button name="test_connection" type="object" string="Test Connection" class="btn-info"/>
+                        <button name="save_configuration" type="object" string="Save Configuration" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- GitHub Configuration Action -->
+        <record id="action_github_config" model="ir.actions.act_window">
+            <field name="name">GitHub Configuration</field>
+            <field name="res_model">github.config</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="view_github_config_form"/>
+        </record>
+
+    </data>
+</odoo>

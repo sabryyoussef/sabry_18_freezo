@@ -1,0 +1,145 @@
+<odoo>
+    <data>
+        <record id="action_qa_error_event" model="ir.actions.act_window">
+            <field name="name">Error Events</field>
+            <field name="res_model">qa.error.event</field>
+            <field name="view_mode">kanban,list,form,graph,pivot</field>
+            <field name="view_id" ref="view_qa_error_event_kanban"/>
+            <field name="target">main</field>
+            <field name="context">{'search_default_filter_today': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No error events recorded yet!
+                </p>
+                <p>
+                    Error events from UI, server, and Playwright tests will appear here.
+                    <br/>
+                    The system automatically captures and reports errors for better monitoring and debugging.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_qa_error_event_graph" model="ir.actions.act_window">
+            <field name="name">Error Analytics</field>
+            <field name="res_model">qa.error.event</field>
+            <field name="view_mode">graph,pivot</field>
+            <field name="view_id" ref="view_qa_error_event_graph"/>
+            <field name="context">{'search_default_filter_week': 1}</field>
+            <field name="help" type="html">
+                <p>
+                    This view provides graphical analysis of error events over time.
+                    <br/>
+                    Use filters and grouping to analyze error patterns and trends.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action for creating new error report -->
+        <record id="action_qa_error_event_new" model="ir.actions.act_window">
+            <field name="name">Report New Error</field>
+            <field name="res_model">qa.error.event</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_qa_error_event_form"/>
+            <field name="target">new</field>
+            <field name="context">{
+                'default_source': 'manual',
+                'default_status': 'new',
+                'form_view_initial_mode': 'edit'
+            }</field>
+        </record>
+
+        <!-- Action for my reports -->
+        <record id="action_qa_error_event_my_reports" model="ir.actions.act_window">
+            <field name="name">My Error Reports</field>
+            <field name="res_model">qa.error.event</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="view_id" ref="view_qa_error_event_kanban"/>
+            <field name="context">{'search_default_filter_my_reports': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    You haven't reported any errors yet!
+                </p>
+                <p>
+                    Click the "Report Error" button in the top menu to submit your first error report.
+                    This view shows all errors that you have personally reported.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action for new errors -->
+        <record id="action_qa_error_event_new_errors" model="ir.actions.act_window">
+            <field name="name">New Errors</field>
+            <field name="res_model">qa.error.event</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="view_id" ref="view_qa_error_event_kanban"/>
+            <field name="context">{'search_default_filter_new': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No new errors to review!
+                </p>
+                <p>
+                    This view shows all errors with "New" status that need to be reviewed and assigned.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action for in progress errors -->
+        <record id="action_qa_error_event_in_progress" model="ir.actions.act_window">
+            <field name="name">Errors In Progress</field>
+            <field name="res_model">qa.error.event</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="view_id" ref="view_qa_error_event_kanban"/>
+            <field name="context">{'search_default_filter_in_progress': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No errors currently being worked on!
+                </p>
+                <p>
+                    This view shows all errors that are currently being investigated or fixed.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action for fixed errors -->
+        <record id="action_qa_error_event_fixed" model="ir.actions.act_window">
+            <field name="name">Fixed Errors</field>
+            <field name="res_model">qa.error.event</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'search_default_filter_fixed': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No fixed errors yet!
+                </p>
+                <p>
+                    This view shows all errors that have been successfully resolved.
+                </p>
+            </field>
+        </record>
+
+        <!-- GitHub Export Action -->
+        <record id="action_export_errors_to_github" model="ir.actions.server">
+            <field name="name">📤 Export to GitHub Issues</field>
+            <field name="model_id" ref="model_qa_error_event"/>
+            <field name="binding_model_id" ref="model_qa_error_event"/>
+            <field name="binding_view_types">list,kanban</field>
+            <field name="state">code</field>
+            <field name="code">
+# Use env to get the model and call the method
+action = env['qa.error.event'].export_errors_to_github_issues()
+            </field>
+        </record>
+
+        <!-- GitHub File Export Action -->
+        <record id="action_export_errors_to_github_files" model="ir.actions.server">
+            <field name="name">📁 Export to GitHub Files</field>
+            <field name="model_id" ref="model_qa_error_event"/>
+            <field name="binding_model_id" ref="model_qa_error_event"/>
+            <field name="binding_view_types">list,kanban</field>
+            <field name="state">code</field>
+            <field name="code">
+# Use env to get the model and call the method
+action = env['qa.error.event'].export_errors_to_github_files()
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Log Handler Management Actions -->
+        <record id="action_register_log_handler" model="ir.actions.server">
+            <field name="name">Enable Log Capture</field>
+            <field name="model_id" ref="model_qa_error_event"/>
+            <field name="binding_model_id" ref="model_qa_error_event"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+result = records.register_log_handler()
+if result:
+    env.user.notify_success(message="Log handler registered successfully! Server errors and warnings will now be automatically captured.")
+else:
+    env.user.notify_warning(message="Log handler was already registered or failed to register.")
+            </field>
+        </record>
+
+        <record id="action_unregister_log_handler" model="ir.actions.server">
+            <field name="name">Disable Log Capture</field>
+            <field name="model_id" ref="model_qa_error_event"/>
+            <field name="binding_model_id" ref="model_qa_error_event"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+result = records.unregister_log_handler()
+if result:
+    env.user.notify_success(message="Log handler unregistered successfully! Automatic log capture is now disabled.")
+else:
+    env.user.notify_warning(message="Log handler was not registered or failed to unregister.")
+            </field>
+        </record>
+
+        <record id="action_test_log_capture" model="ir.actions.server">
+            <field name="name">Test Log Capture</field>
+            <field name="model_id" ref="model_qa_log_handler_manager"/>
+            <field name="binding_model_id" ref="model_qa_error_event"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+env['qa.log.handler.manager'].test_log_capture()
+env.user.notify_success(message="Test log entries generated! Check the Error Events list for new entries.")
+            </field>
+        </record>
+
+        <!-- Log Handler Manager Menu -->
+        <menuitem id="menu_log_handler_config"
+                  name="Log Capture Settings" 
+                  parent="menu_error_reporter_root"
+                  groups="error_reporter_enterprise.group_error_reporter_admin"
+                  sequence="90"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record id="group_error_reporter_user" model="res.groups">
+            <field name="name">Error Reporter User</field>
+            <field name="category_id" ref="base.module_category_tools"/>
+        </record>
+
+        <record id="group_error_reporter_admin" model="res.groups">
+            <field name="name">Error Reporter Admin</field>
+            <field name="category_id" ref="base.module_category_tools"/>
+            <field name="implied_ids" eval="[(4, ref('group_error_reporter_user'))]"/>
+        </record>
+
+        <!-- Add Error Reporter User to all internal users by default -->
+        <record id="base.group_user" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('group_error_reporter_user'))]"/>
+        </record>
+        
+        <!-- Add Error Reporter Admin to system admins -->
+        <record id="base.group_system" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('group_error_reporter_admin'))]"/>
+        </record>
+    </data>
+</odoo>

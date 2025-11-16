@@ -1,0 +1,215 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Configuration for QA Error API Token -->
+        <record id="qa_error_api_token_config" model="ir.config_parameter">
+            <field name="key">qa.error.api_token</field>
+            <field name="value">secure_demo_token_change_in_production_2025</field>
+        </record>
+
+        <!-- Critical Server Errors -->
+        <record id="qa_error_event_critical_1" model="qa.error.event">
+            <field name="source">odoo_server</field>
+            <field name="severity">critical</field>
+            <field name="project">Accounting Module</field>
+            <field name="scenario">Invoice Creation</field>
+            <field name="user_login">admin</field>
+            <field name="url">/web#action=account.action_move_out_invoice_type</field>
+            <field name="browser">Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36</field>
+            <field name="message">Database connection lost during invoice validation</field>
+            <field name="details">psycopg2.OperationalError: connection to server was lost
+    at /home/odoo/addons/account/models/account_move.py:1423
+    in action_post()
+    File "psycopg2/connection.py", line 127, in commit
+    psycopg2.OperationalError: server closed the connection unexpectedly</field>
+            <field name="tags">database,critical,invoice</field>
+            <field name="occurrences">3</field>
+        </record>
+
+        <record id="qa_error_event_critical_2" model="qa.error.event">
+            <field name="source">odoo_ui</field>
+            <field name="severity">critical</field>
+            <field name="project">Sales Module</field>
+            <field name="scenario">Order Confirmation</field>
+            <field name="user_login">sales.manager</field>
+            <field name="url">/web#action=sale.action_orders</field>
+            <field name="browser">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36</field>
+            <field name="message">Cannot read properties of undefined (reading 'id')</field>
+            <field name="details">TypeError: Cannot read properties of undefined (reading 'id')
+    at Object.confirmOrder (http://localhost:8025/web/assets/sale.assets_backend.min.js:2:4567)
+    at HTMLButtonElement.&lt;anonymous&gt; (http://localhost:8025/web/assets/web.assets_backend.min.js:15:8901)
+    at HTMLButtonElement.dispatch (http://localhost:8025/web/assets/web.assets_backend.min.js:3:1234)</field>
+            <field name="tags">frontend,javascript,sales</field>
+            <field name="occurrences">7</field>
+        </record>
+
+        <!-- Error Level Events -->
+        <record id="qa_error_event_error_1" model="qa.error.event">
+            <field name="source">odoo_server</field>
+            <field name="severity">error</field>
+            <field name="project">Inventory Module</field>
+            <field name="scenario">Stock Transfer</field>
+            <field name="user_login">warehouse.user</field>
+            <field name="url">/web#action=stock.action_picking_tree_all</field>
+            <field name="browser">Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101</field>
+            <field name="message">ValidationError: Insufficient stock for product 'Laptop Stand'</field>
+            <field name="details">odoo.exceptions.ValidationError: Insufficient stock for product 'Laptop Stand' in location 'Stock/Shelf A'.
+Available: 5.0, Required: 10.0
+    at /home/odoo/addons/stock/models/stock_move.py:567
+    in _action_confirm()
+    at /home/odoo/addons/stock/models/stock_picking.py:234
+    in action_confirm()</field>
+            <field name="tags">validation,stock,insufficient</field>
+            <field name="occurrences">12</field>
+        </record>
+
+        <record id="qa_error_event_error_2" model="qa.error.event">
+            <field name="source">odoo_ui</field>
+            <field name="severity">error</field>
+            <field name="project">Purchase Module</field>
+            <field name="scenario">Vendor Bill Creation</field>
+            <field name="user_login">purchase.user</field>
+            <field name="url">/web#action=account.action_move_in_invoice_type</field>
+            <field name="browser">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36</field>
+            <field name="message">RPC_ERROR: Access denied for model 'account.move'</field>
+            <field name="details">odoo.exceptions.AccessError: You are not allowed to create 'Vendor Bill' (account.move) records.
+    at Object.createRecord (http://localhost:8025/web/assets/web.assets_backend.min.js:45:2345)
+    at FormController.saveRecord (http://localhost:8025/web/assets/web.assets_backend.min.js:67:8901)
+    at FormController.&lt;anonymous&gt; (http://localhost:8025/web/assets/web.assets_backend.min.js:23:4567)</field>
+            <field name="tags">access,permission,purchase</field>
+            <field name="occurrences">5</field>
+        </record>
+
+        <record id="qa_error_event_error_3" model="qa.error.event">
+            <field name="source">playwright</field>
+            <field name="severity">error</field>
+            <field name="project">E-commerce Tests</field>
+            <field name="scenario">Checkout Process</field>
+            <field name="user_login">test.automation</field>
+            <field name="url">/shop/checkout</field>
+            <field name="browser">Playwright/1.40.0 Chromium/119.0.6045.9</field>
+            <field name="message">Timeout waiting for payment form to load</field>
+            <field name="details">TimeoutError: Timeout 30000ms exceeded.
+Waiting for selector '.payment-form' failed: timeout 30000ms exceeded
+    at /home/tests/e2e/checkout.spec.js:45:12
+    at async test (/home/tests/e2e/checkout.spec.js:23:5)
+Trace: https://trace.playwright.dev/abcd1234</field>
+            <field name="trace_url">https://trace.playwright.dev/abcd1234</field>
+            <field name="tags">timeout,payment,checkout</field>
+            <field name="occurrences">2</field>
+        </record>
+
+        <!-- Warning Level Events -->
+        <record id="qa_error_event_warning_1" model="qa.error.event">
+            <field name="source">odoo_server</field>
+            <field name="severity">warning</field>
+            <field name="project">CRM Module</field>
+            <field name="scenario">Lead Assignment</field>
+            <field name="user_login">crm.manager</field>
+            <field name="url">/web#action=crm.crm_lead_action_pipeline</field>
+            <field name="browser">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101</field>
+            <field name="message">Deprecated method 'old_assign_leads' used in CRM module</field>
+            <field name="details">DeprecationWarning: Method 'old_assign_leads' is deprecated and will be removed in v19.0. Use 'assign_leads_new' instead.
+    at /home/odoo/custom_addons/crm_extended/models/crm_lead.py:123
+    in process_leads()
+    at /home/odoo/addons/crm/models/crm_lead.py:456
+    in action_assign_leads()</field>
+            <field name="tags">deprecated,crm,method</field>
+            <field name="occurrences">15</field>
+        </record>
+
+        <record id="qa_error_event_warning_2" model="qa.error.event">
+            <field name="source">odoo_ui</field>
+            <field name="severity">warning</field>
+            <field name="project">Website Module</field>
+            <field name="scenario">Product Page Load</field>
+            <field name="user_login">portal.user</field>
+            <field name="url">/shop/product/custom-laptop-123</field>
+            <field name="browser">Mozilla/5.0 (Android 11; Mobile; rv:109.0) Gecko/20100101</field>
+            <field name="message">Failed to load product variant images</field>
+            <field name="details">Warning: Failed to load image resource
+NetworkError: Failed to fetch variant images from /web/image/product.product/123/image_512
+    at ProductPage.loadVariantImages (http://localhost:8025/web/assets/website_sale.assets_frontend.min.js:12:3456)
+    at ProductPage.render (http://localhost:8025/web/assets/website_sale.assets_frontend.min.js:8:9012)</field>
+            <field name="tags">image,variant,website</field>
+            <field name="occurrences">8</field>
+        </record>
+
+        <!-- Info Level Events -->
+        <record id="qa_error_event_info_1" model="qa.error.event">
+            <field name="source">odoo_server</field>
+            <field name="severity">info</field>
+            <field name="project">Mail Module</field>
+            <field name="scenario">Email Sending</field>
+            <field name="user_login">system</field>
+            <field name="url">/web#action=mail.action_discuss</field>
+            <field name="browser">System Process</field>
+            <field name="message">Email delivery delayed due to rate limiting</field>
+            <field name="details">INFO: Email to customer@example.com delayed by 30 seconds due to rate limiting policy.
+Message ID: &lt;abcd1234@odoo.example.com&gt;
+    at /home/odoo/addons/mail/models/mail_mail.py:789
+    in _send()
+Retry scheduled for: 2025-11-07 15:45:30</field>
+            <field name="tags">email,ratelimit,delay</field>
+            <field name="occurrences">25</field>
+        </record>
+
+        <record id="qa_error_event_info_2" model="qa.error.event">
+            <field name="source">playwright</field>
+            <field name="severity">info</field>
+            <field name="project">Performance Tests</field>
+            <field name="scenario">Page Load Speed</field>
+            <field name="user_login">performance.tester</field>
+            <field name="url">/web#action=sale.action_orders</field>
+            <field name="browser">Playwright/1.40.0 Chromium/119.0.6045.9</field>
+            <field name="message">Page load time exceeded target (3.2s vs 2.0s target)</field>
+            <field name="details">Performance Info: Sales order page loaded in 3247ms, exceeding target of 2000ms
+Metrics:
+- DOM Content Loaded: 1245ms
+- First Contentful Paint: 856ms
+- Largest Contentful Paint: 2134ms
+- Time to Interactive: 3247ms
+Test: /home/tests/performance/sales_page_load.spec.js:15</field>
+            <field name="trace_url">https://trace.playwright.dev/perf5678</field>
+            <field name="tags">performance,slow,sales</field>
+            <field name="occurrences">4</field>
+        </record>
+
+        <!-- Recent Errors (Today) -->
+        <record id="qa_error_event_today_1" model="qa.error.event">
+            <field name="source">odoo_ui</field>
+            <field name="severity">error</field>
+            <field name="project">Dashboard Module</field>
+            <field name="scenario">Widget Loading</field>
+            <field name="user_login">admin</field>
+            <field name="url">/web#action=board.open_board_my</field>
+            <field name="browser">Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36</field>
+            <field name="message">Dashboard widget 'sales_chart' failed to render</field>
+            <field name="details">Error: Cannot render chart widget 'sales_chart'
+ReferenceError: Chart is not defined
+    at SalesChartWidget.render (http://localhost:8025/web/assets/dashboard.assets_backend.min.js:23:4567)
+    at WidgetManager.renderWidget (http://localhost:8025/web/assets/web.assets_backend.min.js:78:9012)
+    at Dashboard.loadWidgets (http://localhost:8025/web/assets/board.assets_backend.min.js:45:6789)</field>
+            <field name="tags">dashboard,widget,chart</field>
+            <field name="occurrences">1</field>
+        </record>
+
+        <!-- Older sample data with different dates -->
+        <record id="qa_error_event_old_1" model="qa.error.event">
+            <field name="source">odoo_server</field>
+            <field name="severity">warning</field>
+            <field name="project">HR Module</field>
+            <field name="scenario">Payroll Processing</field>
+            <field name="user_login">hr.payroll</field>
+            <field name="url">/web#action=hr_payroll.action_view_hr_payslip</field>
+            <field name="browser">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36</field>
+            <field name="message">Employee overtime calculation approximated due to missing clock data</field>
+            <field name="details">Warning: Clock-in/out data missing for employee John Doe (ID: 15) on 2025-11-05.
+Overtime calculation approximated based on scheduled hours.
+    at /home/odoo/addons/hr_payroll/models/hr_payslip.py:234
+    in compute_overtime()
+Affected payslip: PAY/2025/11/001</field>
+            <field name="tags">payroll,overtime,missing-data</field>
+            <field name="occurrences">3</field>
+        </record>
+    </data>
+</odoo>
