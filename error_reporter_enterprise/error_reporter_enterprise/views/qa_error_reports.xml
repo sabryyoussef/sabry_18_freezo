@@ -7,8 +7,8 @@
             <field name="name">All Errors Report</field>
             <field name="model">qa.error.event</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">automatic_error_reporter.report_all_errors_template</field>
-            <field name="report_file">automatic_error_reporter.report_all_errors_template</field>
+            <field name="report_name">error_reporter_enterprise.report_all_errors_template</field>
+            <field name="report_file">error_reporter_enterprise.report_all_errors_template</field>
             <field name="print_report_name">All_Errors_Report</field>
         </record>
 
@@ -85,7 +85,7 @@
 all_errors = env['qa.error.event'].search([])
 if all_errors:
     # Generate report for all errors
-    action = env.ref('automatic_error_reporter.action_report_all_errors').report_action(all_errors)
+    action = env.ref('error_reporter_enterprise.action_report_all_errors').report_action(all_errors)
 else:
     # Show message if no errors found
     raise UserError("No error records found in the database. Please check if demo data is loaded.")

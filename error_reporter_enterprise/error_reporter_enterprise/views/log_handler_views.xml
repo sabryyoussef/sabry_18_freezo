@@ -49,7 +49,7 @@ env.user.notify_success(message="Test log entries generated! Check the Error Eve
         <menuitem id="menu_log_handler_config"
                   name="Log Capture Settings" 
                   parent="menu_error_reporter_root"
-                  groups="automatic_error_reporter.group_error_reporter_admin"
+                  groups="error_reporter_enterprise.group_error_reporter_admin"
                   sequence="90"/>
 
     </data>

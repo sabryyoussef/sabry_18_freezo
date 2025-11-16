@@ -487,7 +487,7 @@ class QAErrorEvent(models.Model):
                         'type': 'server',
                         'level': 'WARNING',
                         'message': f'Failed to create GitHub issue for error {error.id}: {response.status_code} - {response.text}',
-                        'path': 'automatic_error_reporter',
+                        'path': 'error_reporter_enterprise',
                         'func': 'export_errors_to_github_issues',
                         'line': '1',
                     })
@@ -499,7 +499,7 @@ class QAErrorEvent(models.Model):
                     'type': 'server', 
                     'level': 'ERROR',
                     'message': f'Error creating GitHub issue for error {error.id}: {str(e)}',
-                    'path': 'automatic_error_reporter',
+                    'path': 'error_reporter_enterprise',
                     'func': 'export_errors_to_github_issues',
                     'line': '1',
                 })

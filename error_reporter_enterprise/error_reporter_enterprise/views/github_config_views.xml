@@ -79,7 +79,7 @@
                   parent="menu_error_reporter_root" 
                   action="action_github_config" 
                   sequence="60"
-                  groups="automatic_error_reporter.group_error_reporter_admin"/>
+                  groups="error_reporter_enterprise.group_error_reporter_admin"/>
 
     </data>
 </odoo>

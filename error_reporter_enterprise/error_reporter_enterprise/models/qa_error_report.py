@@ -3,7 +3,7 @@ from odoo import api, models
 
 
 class QAErrorReportXlsx(models.AbstractModel):
-    _name = 'report.automatic_error_reporter.report_all_errors_template'
+    _name = 'report.error_reporter_enterprise.report_all_errors_template'
     _description = 'QA Error Report'
 
     @api.model
