@@ -5,7 +5,7 @@
         <field name="name">res.partner.business.shareholder.tree</field>
         <field name="model">res.partner.business.shareholder</field>
         <field name="arch" type="xml">
-            <tree string="Shareholders">
+            <list string="Shareholders">
                 <field name="contact_id"/>
                 <field name="partner_id"/>
                 <field name="shareholding"/>
@@ -13,7 +13,7 @@
                 <field name="email"/>
                 <field name="mobile"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -110,14 +110,14 @@
                         <field name="business_structure_id"/>
                     </group>
                     <field name="compliance_shareholder_ids">
-                        <tree editable="bottom">
+                        <list editable="bottom">
                             <field name="contact_id"/>
                             <field name="shareholding"/>
                             <field name="company_type"/>
                             <field name="email"/>
                             <field name="mobile"/>
                             <field name="relationship_ids" widget="many2many_tags"/>
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </notebook>

@@ -5,12 +5,12 @@
         <field name="name">project.project.products.tree</field>
         <field name="model">project.project.products</field>
         <field name="arch" type="xml">
-            <tree string="Project Products">
+            <list string="Project Products">
                 <field name="project_id"/>
                 <field name="product_id"/>
                 <field name="partner_id"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -39,11 +39,11 @@
                     <notebook>
                         <page string="Remarks">
                             <field name="remarks_ids">
-                                <tree>
+                                <list>
                                     <field name="name"/>
                                     <field name="user_id"/>
                                     <field name="date"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -98,12 +98,12 @@
         <field name="name">project.project.products.remarks.tree</field>
         <field name="model">project.project.products.remarks</field>
         <field name="arch" type="xml">
-            <tree string="Remarks">
+            <list string="Remarks">
                 <field name="name"/>
                 <field name="user_id"/>
                 <field name="date"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 

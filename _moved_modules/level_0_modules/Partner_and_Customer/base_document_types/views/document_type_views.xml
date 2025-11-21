@@ -5,13 +5,13 @@
         <field name="name">res.partner.document.type.tree</field>
         <field name="model">res.partner.document.type</field>
         <field name="arch" type="xml">
-            <tree string="Document Types">
+            <list string="Document Types">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="code"/>
                 <field name="category_id"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -83,10 +83,10 @@
         <field name="name">res.partner.document.category.tree</field>
         <field name="model">res.partner.document.category</field>
         <field name="arch" type="xml">
-            <tree string="Document Categories">
+            <list string="Document Categories">
                 <field name="name"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -110,7 +110,12 @@
                     </group>
                     <notebook>
                         <page string="Document Types">
-                            <field name="type_ids"/>
+                            <field name="type_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </list>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>

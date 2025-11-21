@@ -5,11 +5,11 @@
         <field name="name">business.structure.tree</field>
         <field name="model">business.structure</field>
         <field name="arch" type="xml">
-            <tree string="Business Structures">
+            <list string="Business Structures">
                 <field name="name"/>
                 <field name="code"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -62,11 +62,11 @@
         <field name="name">business.relationships.tree</field>
         <field name="model">business.relationships</field>
         <field name="arch" type="xml">
-            <tree string="Business Relationships">
+            <list string="Business Relationships">
                 <field name="name"/>
                 <field name="code"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -114,11 +114,11 @@
         <field name="name">res.partner.ubo.tree</field>
         <field name="model">res.partner.ubo</field>
         <field name="arch" type="xml">
-            <tree string="UBO Types">
+            <list string="UBO Types">
                 <field name="name"/>
                 <field name="code"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
