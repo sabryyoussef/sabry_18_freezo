@@ -5,18 +5,14 @@ from odoo.exceptions import ValidationError
 class Partner(models.Model):
     _inherit = "res.partner"
 
-    compliance_shareholder_ids = fields.One2many(
-        "res.partner.business.shareholder", "partner_id"
-    )
+    # Fields compliance_shareholder_ids and business_structure_id are now
+    # defined in base_business_structure module
+    # Keeping only compliance-specific extensions here
+    
     partner_address_lines = fields.One2many("res.partner.address", "partner_id")
-    business_structure_id = fields.Many2one(
-        "business.structure", string="Business Structure"
-    )
     nationality_id = fields.Many2one("res.nationality", string="Nationality")
     project_id = fields.Many2one("project.project", string="Project")
-    project_product_ids = fields.One2many(
-        "project.project.products", "partner_id", string="Project Products"
-    )
+    # project_product_ids now defined in base_project_products module
 
     @api.onchange("parent_id")
     def onchange_parent_id(self):
@@ -51,46 +47,22 @@ class Partner(models.Model):
 
     @api.onchange("parent_partner_ids", "business_structure_id")
     def action_shareholder_lines(self):
+        """Inherited from base_business_structure - add compliance-specific logic if needed"""
         self.prepare_shareholder_lines()
 
     def prepare_shareholder_lines(self):
-        for rec in self:
-            existing_partner_ids = rec.compliance_shareholder_ids.mapped(
-                "contact_id.id"
-            )
-            for partner in rec.parent_partner_ids:
-                partner_id = partner._origin.id or partner.id
-                if partner_id not in existing_partner_ids:
-                    rec.compliance_shareholder_ids = [
-                        (
-                            0,
-                            0,
-                            {
-                                "partner_id": rec.id,
-                                "contact_id": partner_id,  # Use the resolved partner_id
-                                "relationship_ids": rec.business_structure_id.relationships_ids.ids,
-                            },
-                        )
-                    ]
-                else:
-                    print(f"Partner {partner.name} already exists, skipping.")
+        """Inherited from base_business_structure - add compliance-specific logic if needed"""
+        # Call parent method
+        return super().prepare_shareholder_lines()
 
     @api.constrains("compliance_shareholder_ids", "parent_partner_ids")
     def _check_data(self):
-        for rec in self:
-            parent_ids = set(rec.parent_partner_ids.ids)
-            shareholder_contact_ids = set(
-                rec.compliance_shareholder_ids.mapped("contact_id.id")
-            )
-            if parent_ids != shareholder_contact_ids and not rec.project_id:
-                raise ValidationError(" Please remove the shareholder item first. ")
+        """Inherited from base_business_structure - add compliance-specific logic if needed"""
+        # Call parent method
+        return super()._check_data()
 
     @api.depends("project_id")
     def _compute_project_product_ids(self):
-        for rec in self:
-            if rec.project_id:
-                rec.project_product_ids = self.env["project.project.products"].search(
-                    [("project_id", "=", rec.project_id.id)]
-                )
-            else:
-                rec.project_product_ids = False
+        """Compute method now handled by base_project_products module"""
+        # This method is defined in base_project_products module
+        pass

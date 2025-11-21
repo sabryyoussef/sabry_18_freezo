@@ -7,11 +7,13 @@
     "depends": [
         "base",
         "crm",
-        "freezoner_custom",
         "partner_organization",
         "documents",
         "crm_log",
         "client_documents",
+        "base_document_types",      # Base module for document types
+        "base_business_structure",  # Base module for business structure
+        "base_project_products",    # Base module for project products
     ],
     "data": [
         "security/security.xml",

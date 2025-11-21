@@ -3,48 +3,15 @@ from odoo.exceptions import ValidationError
 
 
 class ClientDocumentsCategory(models.Model):
-    _name = "res.partner.document.category"
-    _description = "Client Document Category"
-    _rec_name = "name"
-
-    name = fields.Char()
-    document_ids = fields.One2many(
-        comodel_name="res.partner.document", inverse_name="category_id"
-    )
+    _inherit = "res.partner.document.category"
+    # Extended functionality for document category
+    # Base model defined in base_document_types module
 
 
 class ClientDocumentsType(models.Model):
-    _name = "res.partner.document.type"
-    _description = "Client Document Type"
-
-    name = fields.Char()
-    category_id = fields.Many2one(comodel_name="res.partner.document.category")
-    document_ids = fields.One2many(
-        comodel_name="res.partner.document", inverse_name="type_id"
-    )
-    main_document_ids = fields.Many2many(
-        "documents.document", compute="_compute_main_document_ids"
-    )
-
-    def _compute_main_document_ids(self):
-        for rec in self:
-            lst = []
-            # Check if documents module is installed before trying to access it
-            if 'documents.document' in self.env:
-                try:
-                    # Note: documents.document doesn't have type_id field by default
-                    # This would need custom integration if you want to link them
-                    # For now, we'll look for documents that might be related by name or other means
-                    documents = self.env["documents.document"].search([
-                        '|',
-                        ('name', 'ilike', rec.name),
-                        ('partner_id', 'in', rec.document_ids.mapped('partner_id').ids)
-                    ])
-                    lst = documents.ids
-                except Exception:
-                    # If there's any error with the documents module, just set empty list
-                    lst = []
-            rec.main_document_ids = lst
+    _inherit = "res.partner.document.type"
+    # Extended functionality for document type
+    # Base model defined in base_document_types module
 
 
 class ClientDocuments(models.Model):

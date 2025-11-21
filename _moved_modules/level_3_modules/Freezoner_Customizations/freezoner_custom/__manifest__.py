@@ -22,6 +22,8 @@
         "crm",
         "cabinet_directory",
         "mass_mailing",
+        "base_document_types",      # Base module for document types
+        "base_project_products",    # Base module for project products
         # "calendar",  # COMMENTED OUT: Causes KeyError during install, calendar code disabled in models
     ],
     "data": [

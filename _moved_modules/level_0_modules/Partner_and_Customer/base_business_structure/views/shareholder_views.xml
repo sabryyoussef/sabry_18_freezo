@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Shareholder Tree View -->
+    <record id="view_business_shareholder_tree" model="ir.ui.view">
+        <field name="name">res.partner.business.shareholder.tree</field>
+        <field name="model">res.partner.business.shareholder</field>
+        <field name="arch" type="xml">
+            <tree string="Shareholders">
+                <field name="contact_id"/>
+                <field name="partner_id"/>
+                <field name="shareholding"/>
+                <field name="company_type"/>
+                <field name="email"/>
+                <field name="mobile"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Shareholder Form View -->
+    <record id="view_business_shareholder_form" model="ir.ui.view">
+        <field name="name">res.partner.business.shareholder.form</field>
+        <field name="model">res.partner.business.shareholder</field>
+        <field name="arch" type="xml">
+            <form string="Shareholder">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="contact_id"/>
+                            <field name="partner_id"/>
+                            <field name="project_id"/>
+                            <field name="customer_id"/>
+                        </group>
+                        <group>
+                            <field name="shareholding"/>
+                            <field name="company_type"/>
+                            <field name="ubo_id"/>
+                            <field name="relationship_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group string="Contact Information">
+                        <group>
+                            <field name="email"/>
+                            <field name="mobile"/>
+                        </group>
+                        <group>
+                            <field name="nationality_id"/>
+                            <field name="gender" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                            <field name="uae_resident" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                        </group>
+                    </group>
+                    <group string="Corporate Information" attrs="{'invisible': [('company_type', '=', 'person')]}">
+                        <group>
+                            <field name="license_authority_id"/>
+                            <field name="license_number"/>
+                            <field name="license_validity"/>
+                        </group>
+                        <group>
+                            <field name="incorporation_date"/>
+                        </group>
+                    </group>
+                    <group string="Documents">
+                        <group>
+                            <field name="passport"/>
+                            <field name="eid_copy"/>
+                            <field name="residence_visa_copy"/>
+                            <field name="current_visa"/>
+                        </group>
+                        <group>
+                            <field name="entry_stamp"/>
+                            <field name="trade_license"/>
+                            <field name="memorandum_association"/>
+                            <field name="apply_visa"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Shareholder Action -->
+    <record id="action_business_shareholder" model="ir.actions.act_window">
+        <field name="name">Shareholders</field>
+        <field name="res_model">res.partner.business.shareholder</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new shareholder
+            </p>
+            <p>
+                Track shareholder information and ownership structure.
+            </p>
+        </field>
+    </record>
+
+    <!-- Add Shareholders to Partner Form -->
+    <record id="view_partner_form_shareholders" model="ir.ui.view">
+        <field name="name">res.partner.form.shareholders</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Shareholders" name="shareholders">
+                    <group>
+                        <field name="business_structure_id"/>
+                    </group>
+                    <field name="compliance_shareholder_ids">
+                        <tree editable="bottom">
+                            <field name="contact_id"/>
+                            <field name="shareholding"/>
+                            <field name="company_type"/>
+                            <field name="email"/>
+                            <field name="mobile"/>
+                            <field name="relationship_ids" widget="many2many_tags"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <!-- Menu Item for Shareholders -->
+    <menuitem id="menu_shareholders"
+              name="Shareholders"
+              parent="menu_base_business_structure_root"
+              action="action_business_shareholder"
+              sequence="40"/>
+
+</odoo>

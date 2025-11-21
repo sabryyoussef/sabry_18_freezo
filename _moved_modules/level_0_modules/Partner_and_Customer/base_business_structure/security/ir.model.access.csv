@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_business_structure_user,business.structure.user,model_business_structure,base.group_user,1,1,1,1
+access_business_relationships_user,business.relationships.user,model_business_relationships,base.group_user,1,1,1,1
+access_res_partner_ubo_user,res.partner.ubo.user,model_res_partner_ubo,base.group_user,1,1,1,1
+access_res_partner_business_shareholder_user,res.partner.business.shareholder.user,model_res_partner_business_shareholder,base.group_user,1,1,1,1
+access_business_structure_portal,business.structure.portal,model_business_structure,base.group_portal,1,0,0,0
+access_business_relationships_portal,business.relationships.portal,model_business_relationships,base.group_portal,1,0,0,0
+access_res_partner_ubo_portal,res.partner.ubo.portal,model_res_partner_ubo,base.group_portal,1,0,0,0
+access_res_partner_business_shareholder_portal,res.partner.business.shareholder.portal,model_res_partner_business_shareholder,base.group_portal,1,0,0,0

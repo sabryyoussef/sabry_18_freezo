@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner_document_type_user,res.partner.document.type.user,model_res_partner_document_type,base.group_user,1,1,1,1
+access_res_partner_document_category_user,res.partner.document.category.user,model_res_partner_document_category,base.group_user,1,1,1,1
+access_task_document_required_lines_user,task.document.required.lines.user,model_task_document_required_lines,base.group_user,1,1,1,1
+access_res_partner_document_type_portal,res.partner.document.type.portal,model_res_partner_document_type,base.group_portal,1,0,0,0
+access_res_partner_document_category_portal,res.partner.document.category.portal,model_res_partner_document_category,base.group_portal,1,0,0,0
+access_task_document_required_lines_portal,task.document.required.lines.portal,model_task_document_required_lines,base.group_portal,1,0,0,0

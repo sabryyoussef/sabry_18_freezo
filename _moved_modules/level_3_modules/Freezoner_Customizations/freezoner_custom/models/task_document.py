@@ -6,8 +6,8 @@ _logger = logging.getLogger(__name__)
 
 class TaskDocumentLines(models.Model):
     """
-    Task Document Lines
-    Manages document types for tasks
+    Task Document Lines Extension
+    Manages document types for tasks - extends base functionality
     """
     _name = 'task.document.lines'
     _description = 'Task Document Lines'
@@ -115,40 +115,35 @@ class TaskDocumentLines(models.Model):
 
 class TaskDocumentRequiredLines(models.Model):
     """
-    Task Document Required Lines
-    Manages mandatory documents for tasks
+    Task Document Required Lines Extension
+    Base model defined in base_document_types module
     """
-    _name = 'task.document.required.lines'
-    _description = 'Task Document Required Lines'
-    _order = 'sequence, id'
-
-    sequence = fields.Integer(
-        string='Sequence',
-        default=10,
-        help='Order of document in the list'
+    _inherit = 'task.document.required.lines'
+    
+    # Add freezoner-specific extensions
+    onboarding_id = fields.Many2one(
+        'compliance.onboarding',
+        string='Onboarding',
+        help='Related onboarding record'
     )
     
-    name = fields.Char(
-        string='Name',
-        help='Name of the document line'
+    validation_rule = fields.Selection([
+        ('none', 'No Validation'),
+        ('expiry', 'Check Expiry'),
+        ('completeness', 'Check Completeness'),
+        ('both', 'Check Both')
+    ], string='Validation Rule',
+        default='none',
+        tracking=True,
+        help='Rule to validate the document'
     )
 
-    task_ids = fields.Many2one(
-        "project.task", string="Task", ondelete="cascade"
-    )
-    document_id = fields.Many2one(
-        "documents.document", string="Document", required=True
-    )
-    issue_date = fields.Date(string="Issue Date")
-    
-    project_id = fields.Many2one(
-        'project.project',
-        string='Project',
-        required=True,
-        ondelete='cascade',
-        index=True,
-        help='Related project'
-    )
+    def fetch_document(self):
+        """Fetch documents for this task"""
+        for record in self:
+            _logger.info(f'Fetch Documents button clicked for record {record.id}')
+            # Add logic to fetch documents here
+        return True
     
     
     

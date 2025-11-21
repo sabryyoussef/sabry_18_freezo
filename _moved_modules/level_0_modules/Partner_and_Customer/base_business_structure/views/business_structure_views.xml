@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Business Structure Tree View -->
+    <record id="view_business_structure_tree" model="ir.ui.view">
+        <field name="name">business.structure.tree</field>
+        <field name="model">business.structure</field>
+        <field name="arch" type="xml">
+            <tree string="Business Structures">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Business Structure Form View -->
+    <record id="view_business_structure_form" model="ir.ui.view">
+        <field name="name">business.structure.form</field>
+        <field name="model">business.structure</field>
+        <field name="arch" type="xml">
+            <form string="Business Structure">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="relationships_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Business Structure Action -->
+    <record id="action_business_structure" model="ir.actions.act_window">
+        <field name="name">Business Structures</field>
+        <field name="res_model">business.structure</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new business structure
+            </p>
+            <p>
+                Define organizational structure types for businesses.
+            </p>
+        </field>
+    </record>
+
+    <!-- Business Relationships Tree View -->
+    <record id="view_business_relationships_tree" model="ir.ui.view">
+        <field name="name">business.relationships.tree</field>
+        <field name="model">business.relationships</field>
+        <field name="arch" type="xml">
+            <tree string="Business Relationships">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Business Relationships Form View -->
+    <record id="view_business_relationships_form" model="ir.ui.view">
+        <field name="name">business.relationships.form</field>
+        <field name="model">business.relationships</field>
+        <field name="arch" type="xml">
+            <form string="Business Relationship">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Business Relationships Action -->
+    <record id="action_business_relationships" model="ir.actions.act_window">
+        <field name="name">Business Relationships</field>
+        <field name="res_model">business.relationships</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new business relationship
+            </p>
+            <p>
+                Define relationship types between business entities.
+            </p>
+        </field>
+    </record>
+
+    <!-- UBO Tree View -->
+    <record id="view_res_partner_ubo_tree" model="ir.ui.view">
+        <field name="name">res.partner.ubo.tree</field>
+        <field name="model">res.partner.ubo</field>
+        <field name="arch" type="xml">
+            <tree string="UBO Types">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- UBO Form View -->
+    <record id="view_res_partner_ubo_form" model="ir.ui.view">
+        <field name="name">res.partner.ubo.form</field>
+        <field name="model">res.partner.ubo</field>
+        <field name="arch" type="xml">
+            <form string="UBO Type">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- UBO Action -->
+    <record id="action_res_partner_ubo" model="ir.actions.act_window">
+        <field name="name">UBO Types</field>
+        <field name="res_model">res.partner.ubo</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new UBO type
+            </p>
+            <p>
+                Define Ultimate Beneficial Owner types for compliance.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_base_business_structure_root"
+              name="Business Structure"
+              sequence="101"
+              web_icon="base_business_structure,static/description/icon.png"/>
+    
+    <menuitem id="menu_business_structures"
+              name="Business Structures"
+              parent="menu_base_business_structure_root"
+              action="action_business_structure"
+              sequence="10"/>
+    
+    <menuitem id="menu_business_relationships"
+              name="Relationships"
+              parent="menu_base_business_structure_root"
+              action="action_business_relationships"
+              sequence="20"/>
+    
+    <menuitem id="menu_ubo_types"
+              name="UBO Types"
+              parent="menu_base_business_structure_root"
+              action="action_res_partner_ubo"
+              sequence="30"/>
+
+</odoo>

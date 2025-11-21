@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_project_products_user,project.project.products.user,model_project_project_products,base.group_user,1,1,1,1
+access_project_project_products_remarks_user,project.project.products.remarks.user,model_project_project_products_remarks,base.group_user,1,1,1,1
+access_project_project_products_portal,project.project.products.portal,model_project_project_products,base.group_portal,1,0,0,0
+access_project_project_products_remarks_portal,project.project.products.remarks.portal,model_project_project_products_remarks,base.group_portal,1,0,0,0

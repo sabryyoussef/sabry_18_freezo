@@ -10,11 +10,12 @@
         'account',  # Required by project.py for account.action_move_out_invoice_type
         'rating',  # Required by project.py for rating_data import
         'documents',  # Required by document.xml for documents.document_view_form
-        'freezoner_custom',
-        'compliance_cycle',
         'partner_custom',
         'client_documents',
         'partner_custom_fields',
+        'base_document_types',      # Base module for document types
+        'base_business_structure',  # Base module for business structure
+        'base_project_products',    # Base module for project products
     ],
     'data': [
         'security/security.xml',
