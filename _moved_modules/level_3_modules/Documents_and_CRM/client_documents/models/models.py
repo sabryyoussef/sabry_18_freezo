@@ -6,12 +6,49 @@ class ClientDocumentsCategory(models.Model):
     _inherit = "res.partner.document.category"
     # Extended functionality for document category
     # Base model defined in base_document_types module
+    
+    document_ids = fields.One2many(
+        comodel_name="res.partner.document",
+        inverse_name="category_id",
+        string="Documents",
+        help="Documents in this category"
+    )
 
 
 class ClientDocumentsType(models.Model):
     _inherit = "res.partner.document.type"
     # Extended functionality for document type
     # Base model defined in base_document_types module
+    
+    document_ids = fields.One2many(
+        comodel_name="res.partner.document",
+        inverse_name="type_id",
+        string="Documents",
+        help="Documents using this type"
+    )
+    
+    main_document_ids = fields.Many2many(
+        "documents.document",
+        compute="_compute_main_document_ids",
+        string="Main Documents",
+        help="Related documents from the documents module"
+    )
+
+    def _compute_main_document_ids(self):
+        """Compute related documents from documents module"""
+        for rec in self:
+            lst = []
+            if 'documents.document' in self.env:
+                try:
+                    documents = self.env["documents.document"].search([
+                        '|',
+                        ('name', 'ilike', rec.name),
+                        ('partner_id', 'in', rec.document_ids.mapped('partner_id').ids)
+                    ])
+                    lst = documents.ids
+                except Exception:
+                    lst = []
+            rec.main_document_ids = lst
 
 
 class ClientDocuments(models.Model):

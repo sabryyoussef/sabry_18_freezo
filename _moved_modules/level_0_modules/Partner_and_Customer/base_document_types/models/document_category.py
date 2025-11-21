@@ -30,13 +30,6 @@ class ResPartnerDocumentCategory(models.Model):
         help="If unchecked, this category will be hidden"
     )
     
-    document_ids = fields.One2many(
-        comodel_name="res.partner.document",
-        inverse_name="category_id",
-        string="Documents",
-        help="Documents in this category"
-    )
-    
     type_ids = fields.One2many(
         comodel_name="res.partner.document.type",
         inverse_name="category_id",
